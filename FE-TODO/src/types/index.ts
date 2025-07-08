@@ -29,3 +29,8 @@ export type TaskGroup = {
     dateLabel: string;
     tasks: CompletedTask[];
 }
+
+export type ModalProps = {
+    open: boolean;
+    onClose: () => void;
+}

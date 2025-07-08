@@ -15,10 +15,11 @@ import {
     BellOutlined,
 } from "@ant-design/icons";
 import styles from "./Sidebar.module.scss"
-import AddTaskModal from "../Tasks/ModalAddTask";
+import AddTaskModal from "../Modal/ModalAddTask";
 import { Link } from "react-router-dom";
 import { ROUTES } from '../../routes/paths';
 import { UserInfo } from "./UserInfo";
+import { ModalSearch } from "../Modal/ModalSearch";
 
 const { Sider } = Layout;
 const { Text } = Typography;
@@ -37,7 +38,9 @@ const items: MenuItem[] = [
 ];
 export const Sidebar: React.FC = () => {
     const [collapsed, setCollapsed] = useState(false);
-    const [modalOpen, setModalOpen] = useState(false)
+    const [modalOpenAddTask, setModalOpenAddTask] = useState(false)
+    const [modalOpenSearch, setModalOpenSearch] = useState(false)
+
     const toggleCollapse = () => setCollapsed(!collapsed);
 
     return (
@@ -73,7 +76,7 @@ export const Sidebar: React.FC = () => {
             <Divider />
             <Menu mode="vertical" selectable={false} style={{ border: "none" }} inlineCollapsed={collapsed}>
                 <Menu.Item
-                    onClick={() => setModalOpen(true)}
+                    onClick={() => setModalOpenAddTask(true)}
                     icon={<PlusCircleFilled
                         style={{ color: '#a81f00', fontSize: '20px' }}
                     />}>
@@ -82,7 +85,9 @@ export const Sidebar: React.FC = () => {
                         Thêm công việc
                     </Text>}
                 </Menu.Item>
-                <Menu.Item icon={<SearchOutlined />}>
+                <Menu.Item
+                    onClick={() => setModalOpenSearch(true)}
+                    icon={<SearchOutlined />}>
                     {!collapsed && <>Tìm kiếm<span style={countStyle}>12</span></>}
                 </Menu.Item>
                 <Menu.Item icon={<InboxOutlined />}>
@@ -113,8 +118,14 @@ export const Sidebar: React.FC = () => {
             />
 
             <AddTaskModal
-                open={modalOpen}
-                onClose={() => setModalOpen(false)}
+                open={modalOpenAddTask}
+                onClose={() => setModalOpenAddTask(false)}
+            // onSubmit={handleAddTask}
+            />
+
+            <ModalSearch
+                open={modalOpenSearch}
+                onClose={() => setModalOpenSearch(false)}
             // onSubmit={handleAddTask}
             />
         </Sider>

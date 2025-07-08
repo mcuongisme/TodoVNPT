@@ -5,7 +5,7 @@ import {
 import {
     PlusOutlined,
 } from "@ant-design/icons";
-import AddTaskModal from "../Tasks/ModalAddTask";
+import AddTaskModal from "../Modal/ModalAddTask";
 import { InboxList } from "./InboxList";
 
 const { Title } = Typography;

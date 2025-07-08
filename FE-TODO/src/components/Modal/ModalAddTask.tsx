@@ -17,16 +17,13 @@ import {
     ClockCircleOutlined,
     TagOutlined,
 } from "@ant-design/icons";
-
+import type { ModalProps } from "../../types";
 const { TextArea } = Input;
 const { Option } = Select;
 
-interface AddTaskModalProps {
-    open: boolean;
-    onClose: () => void;
-}
 
-const AddTaskModal: React.FC<AddTaskModalProps> = ({ open, onClose }) => {
+
+const AddTaskModal: React.FC<ModalProps> = ({ open, onClose }) => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
 

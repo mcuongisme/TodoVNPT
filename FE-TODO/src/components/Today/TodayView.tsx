@@ -6,7 +6,7 @@ import {
     FileDoneOutlined,
     PlusOutlined,
 } from "@ant-design/icons";
-import AddTaskModal from "../Tasks/ModalAddTask";
+import AddTaskModal from "../Modal/ModalAddTask";
 import { TodayList } from './TodayList';
 const { Title } = Typography
 export const TodayView = () => {
