@@ -11,11 +11,14 @@ import {
     PlusCircleFilled,
     ProjectOutlined,
     SearchOutlined,
+    BellFilled,
+    BellOutlined,
 } from "@ant-design/icons";
 import styles from "./Sidebar.module.scss"
-import AddTaskModal from "../../Tasks/ModalAddTask";
+import AddTaskModal from "../Tasks/ModalAddTask";
 import { Link } from "react-router-dom";
-import { ROUTES } from '../../../routes/paths';
+import { ROUTES } from '../../routes/paths';
+import { UserInfo } from "./UserInfo";
 
 const { Sider } = Layout;
 const { Text } = Typography;
@@ -49,16 +52,15 @@ export const Sidebar: React.FC = () => {
         >
             <div className={styles.top_sidebar}>
                 {!collapsed && (
-                    <div className={styles.user_info} >
-                        <Avatar size={40} icon={<span style={{ fontSize: 18 }}>👤</span>} />
-                        <div style={{ marginLeft: 12 }}>
-                            <div style={{ fontWeight: 600 }}>Nguyễn Văn An</div>
-                            <Text type="secondary" style={{ fontSize: 12 }}>
-                                @nguyenvanan
-                            </Text>
-                        </div>
-                    </div>
+                    <UserInfo />
                 )}
+                <Tooltip title="Open Notification">
+                    <Button
+                        type="text"
+                        icon={<BellOutlined />}
+                        href={ROUTES.NOTIFICATIONS}
+                    />
+                </Tooltip>
                 <Tooltip title="Open/Close Sidebar">
                     <Button
                         type="text"

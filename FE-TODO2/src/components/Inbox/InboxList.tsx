@@ -5,7 +5,6 @@ import {
     MoreOutlined,
     DragOutlined,
 } from "@ant-design/icons"; import { Checkbox, Space, Tooltip, Typography } from 'antd';
-import React from 'react'
 import type { Task } from "../../types";
 const { Text } = Typography;
 

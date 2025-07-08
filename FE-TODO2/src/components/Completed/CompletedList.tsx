@@ -38,12 +38,10 @@ export const CompletedList = () => {
                                     borderBottom: "1px solid #f0f0f0",
                                 }}
                             >
-                                {/* Avatar + Check icon */}
                                 <div style={{ position: "relative" }}>
                                     <Avatar
                                         size={40}
-                                        src={undefined}
-                                        icon={undefined}
+                                        icon={<span style={{ fontSize: 18 }}>👤</span>}
                                         style={{ backgroundColor: "#f0f0f0" }}
                                     />
                                     <CheckCircleFilled
@@ -59,7 +57,6 @@ export const CompletedList = () => {
                                     />
                                 </div>
 
-                                {/* Task content */}
                                 <div style={{ flex: 1 }}>
                                     <Text>
                                         <strong>You</strong> completed a task:{" "}

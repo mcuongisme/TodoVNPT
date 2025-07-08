@@ -7,6 +7,7 @@ export const ROUTES = {
     UPCOMING: '/upcoming',
     LABEL_FILTER: '/labels-filters',
     COMPLETED: '/completed',
+    NOTIFICATIONS: '/notifications',
 
     ACCOUNT: {
         PREFIX: accPrefix,
