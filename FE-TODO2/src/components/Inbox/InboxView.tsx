@@ -14,7 +14,7 @@ export const InboxView: React.FC = () => {
     const [modalOpen, setModalOpen] = useState(false)
     return (
         <div style={{ padding: 24 }}>
-            <Title level={3}>Inbox</Title>
+            <Title level={3}>Hộp thư đến</Title>
             <InboxList />
             <div
                 style={{

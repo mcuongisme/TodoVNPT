@@ -5,3 +5,13 @@ export type Task = {
     dueDate?: string;
     completed: boolean;
 }
+
+export type FilterItem = {
+    name: string;
+    usedCount?: number;
+}
+
+export type LabelItem = {
+    name: string;
+    color?: string;
+}
