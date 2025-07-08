@@ -15,3 +15,17 @@ export type LabelItem = {
     name: string;
     color?: string;
 }
+
+export type CompletedTask = {
+    id: number;
+    title: string;
+    time: string;
+    project: string;
+    projectIcon?: React.ReactNode;
+    section?: string;
+}
+
+export type TaskGroup = {
+    dateLabel: string;
+    tasks: CompletedTask[];
+}

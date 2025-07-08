@@ -96,7 +96,7 @@ export const Sidebar: React.FC = () => {
                     {!collapsed && <><Link to={ROUTES.LABEL_FILTER}>Nhãn & bộ lọc<span style={countStyle}>2</span></Link></>}
                 </Menu.Item>
                 <Menu.Item icon={<CheckCircleOutlined />}>
-                    {!collapsed && <>Đã hoàn thành <span style={countStyle}>24</span></>}
+                    {!collapsed && <><Link to={ROUTES.COMPLETED}>Đã hoàn thành<span style={countStyle}>2</span></Link></>}
                 </Menu.Item>
             </Menu>
 

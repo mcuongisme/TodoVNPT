@@ -1,12 +1,13 @@
 import React from 'react'
 import { Collapse, Dropdown, Space, Typography, type MenuProps } from "antd";
 import { DownOutlined } from '@ant-design/icons';
+import { CompletedList } from './CompletedList';
 
 const { Title } = Typography;
 const items: MenuProps['items'] = [
     {
         label: (
-            <a href="https://www.antgroup.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.antgroup.com" rel="noopener noreferrer">
                 1st menu item
             </a>
         ),
@@ -14,7 +15,7 @@ const items: MenuProps['items'] = [
     },
     {
         label: (
-            <a href="https://www.aliyun.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.aliyun.com" rel="noopener noreferrer">
                 2nd menu item
             </a>
         ),
@@ -31,17 +32,22 @@ const items: MenuProps['items'] = [
 export const CompletedView = () => {
     return (
         <div style={{ padding: 24 }}>
-            <Title level={3}>Activity:
 
-                <Dropdown menu={{ items }} trigger={['click']}>
-                    <a onClick={(e) => e.preventDefault()}>
-                        <Space>
-                            Click me
-                            <DownOutlined />
-                        </Space>
-                    </a>
-                </Dropdown>
+            <Title level={3}>
+                <Space>
+                    Hoạt động:
+                    <Dropdown menu={{ items }} trigger={['click']}>
+                        <a onClick={(e) => e.preventDefault()} style={{ color: 'black' }}>
+                            <Space>
+                                Tất cả dự án
+                                <DownOutlined style={{ fontSize: 15 }} />
+                            </Space>
+                        </a>
+                    </Dropdown>
+                </Space>
             </Title>
+
+            <CompletedList />
 
         </div>
 
