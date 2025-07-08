@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import {
-    Checkbox,
     Typography,
-
 } from "antd";
 import {
+    FileDoneOutlined,
     PlusOutlined,
 } from "@ant-design/icons";
 import AddTaskModal from "../Tasks/ModalAddTask";
@@ -15,6 +14,7 @@ export const TodayView = () => {
     return (
         <div style={{ padding: 24 }}>
             <Title level={3}>Công việc hôm nay</Title>
+            <span style={{ color: '#999' }}><FileDoneOutlined /> 2 tasks</span>
             <TodayList />
             <div
                 style={{

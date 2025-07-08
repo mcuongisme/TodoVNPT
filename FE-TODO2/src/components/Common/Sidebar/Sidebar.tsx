@@ -15,6 +15,8 @@ import {
 import styles from "./Sidebar.module.scss"
 import AddTaskModal from "../../Tasks/ModalAddTask";
 import { Link } from "react-router-dom";
+import { ROUTES } from '../../../routes/paths';
+
 const { Sider } = Layout;
 const { Text } = Typography;
 type MenuItem = Required<MenuProps>['items'][number];
@@ -47,7 +49,7 @@ export const Sidebar: React.FC = () => {
         >
             <div className={styles.top_sidebar}>
                 {!collapsed && (
-                    <div className={styles.user_info} style={{ display: "flex", alignItems: "center" }}>
+                    <div className={styles.user_info} >
                         <Avatar size={40} icon={<span style={{ fontSize: 18 }}>👤</span>} />
                         <div style={{ marginLeft: 12 }}>
                             <div style={{ fontWeight: 600 }}>Nguyễn Văn An</div>
@@ -82,16 +84,16 @@ export const Sidebar: React.FC = () => {
                     {!collapsed && <>Tìm kiếm<span style={countStyle}>12</span></>}
                 </Menu.Item>
                 <Menu.Item icon={<InboxOutlined />}>
-                    {!collapsed && <><Link to={'/inbox'}>Hộp thư đến<span style={countStyle}>12</span></Link></>}
+                    {!collapsed && <><Link to={ROUTES.INBOX}>Hộp thư đến<span style={countStyle}>12</span></Link></>}
                 </Menu.Item>
                 <Menu.Item icon={<CalendarOutlined />}>
-                    {!collapsed && <>Hôm nay <span style={countStyle}>5</span></>}
+                    {!collapsed && <><Link to={ROUTES.TODAY}>Hôm nay<span style={countStyle}>5</span></Link></>}
                 </Menu.Item>
                 <Menu.Item icon={<ClockCircleOutlined />}>
-                    {!collapsed && <>Sắp tới <span style={countStyle}>8</span></>}
+                    {!collapsed && <><Link to={ROUTES.UPCOMING}>Sắp tới<span style={countStyle}>7</span></Link></>}
                 </Menu.Item>
                 <Menu.Item icon={<TagsOutlined />}>
-                    {!collapsed && "Nhãn & Bộ lọc"}
+                    {!collapsed && <><Link to={ROUTES.LABEL_FILTER}>Nhãn & bộ lọc<span style={countStyle}>2</span></Link></>}
                 </Menu.Item>
                 <Menu.Item icon={<CheckCircleOutlined />}>
                     {!collapsed && <>Đã hoàn thành <span style={countStyle}>24</span></>}

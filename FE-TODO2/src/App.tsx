@@ -6,6 +6,9 @@ import { Sidebar } from './components/Common/Sidebar/Sidebar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { InboxView } from './components/Inbox/InboxView';
 import { TodayView } from './components/Today/TodayView';
+import { ROUTES } from './routes/paths';
+import { UpcomingView } from './components/Upcoming/UpcomingView';
+import { LabelFilter } from './components/FilterLabel/FilterLabelView';
 const { Content } = Layout;
 
 const App: React.FC = () => {
@@ -13,12 +16,13 @@ const App: React.FC = () => {
     <Router>
       <Layout style={{ minHeight: '100vh' }}>
         <Sidebar />
-
         <Layout>
           <Content style={{ margin: '16px' }}>
             <Routes>
-              <Route path="/inbox" element={<InboxView />} />
-              <Route path="/today" element={<TodayView />} />
+              <Route path={ROUTES.INBOX} element={<InboxView />} />
+              <Route path={ROUTES.TODAY} element={<TodayView />} />
+              <Route path={ROUTES.UPCOMING} element={<UpcomingView />} />
+              <Route path={ROUTES.LABEL_FILTER} element={<LabelFilter />} />
             </Routes>
           </Content>
         </Layout>
