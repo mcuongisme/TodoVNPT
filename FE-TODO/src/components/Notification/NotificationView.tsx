@@ -1,5 +1,6 @@
 import { Segmented, Typography } from 'antd';
 import React, { useState } from 'react'
+import { NotificationList } from './NotificationList';
 const { Title } = Typography;
 
 export const NotificationView = () => {
@@ -14,6 +15,7 @@ export const NotificationView = () => {
                 size="large"
                 style={{ backgroundColor: "#e7e7e7", margin: "10px" }}
             />
+            <NotificationList />
         </div>
     )
 }

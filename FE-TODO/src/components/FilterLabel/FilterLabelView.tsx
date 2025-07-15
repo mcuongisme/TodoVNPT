@@ -10,7 +10,7 @@ const { Text, Title } = Typography;
 export const LabelFilter: React.FC = () => {
     return (
         <div style={{ padding: 24 }}>
-            <Title level={3}>Inbox</Title>
+            <Title level={3}>Filters & Labels</Title>
             <Collapse ghost defaultActiveKey={["filters", "labels"]}>
                 <Panel
                     header={

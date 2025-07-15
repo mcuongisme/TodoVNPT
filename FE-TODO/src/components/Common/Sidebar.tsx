@@ -79,7 +79,8 @@ export const Sidebar: React.FC = () => {
                     onClick={() => setModalOpenAddTask(true)}
                     icon={<PlusCircleFilled
                         style={{ color: '#a81f00', fontSize: '20px' }}
-                    />}>
+                    />}
+                    title="Thêm công việc">
                     {!collapsed && <Text
                         style={{ color: '#a81f00', fontSize: '15px', fontWeight: 'bold' }}>
                         Thêm công việc
@@ -87,23 +88,28 @@ export const Sidebar: React.FC = () => {
                 </Menu.Item>
                 <Menu.Item
                     onClick={() => setModalOpenSearch(true)}
-                    icon={<SearchOutlined />}>
+                    icon={<SearchOutlined />}
+                    title="Tìm kiếm công việc">
                     {!collapsed && <>Tìm kiếm<span style={countStyle}>12</span></>}
                 </Menu.Item>
-                <Menu.Item icon={<InboxOutlined />}>
-                    {!collapsed && <><Link to={ROUTES.INBOX}>Hộp thư đến<span style={countStyle}>12</span></Link></>}
+
+                <Menu.Item icon={<InboxOutlined />} title="Hộp thư đến">
+                    <Link to={ROUTES.INBOX}>{!collapsed && <>Hộp thư đến<span style={countStyle}>12</span></>}</Link>
                 </Menu.Item>
-                <Menu.Item icon={<CalendarOutlined />}>
-                    {!collapsed && <><Link to={ROUTES.TODAY}>Hôm nay<span style={countStyle}>5</span></Link></>}
+
+                <Menu.Item icon={<CalendarOutlined />} title="Hôm nay">
+                    <Link to={ROUTES.TODAY}>{!collapsed && <> Hôm nay<span style={countStyle}>5</span></>}</Link>
                 </Menu.Item>
-                <Menu.Item icon={<ClockCircleOutlined />}>
-                    {!collapsed && <><Link to={ROUTES.UPCOMING}>Sắp tới<span style={countStyle}>7</span></Link></>}
+
+                <Menu.Item icon={<ClockCircleOutlined />} title="Sắp tới">
+                    <Link to={ROUTES.UPCOMING}>{!collapsed && <>Sắp tới<span style={countStyle}>7</span></>}</Link>
                 </Menu.Item>
-                <Menu.Item icon={<TagsOutlined />}>
-                    {!collapsed && <><Link to={ROUTES.LABEL_FILTER}>Nhãn & bộ lọc<span style={countStyle}>2</span></Link></>}
+                <Menu.Item icon={<TagsOutlined />} title="Nhãn & bộ lọc">
+                    <Link to={ROUTES.LABEL_FILTER}>{!collapsed && <>Nhãn & bộ lọc<span style={countStyle}>2</span></>}</Link>
                 </Menu.Item>
-                <Menu.Item icon={<CheckCircleOutlined />}>
-                    {!collapsed && <><Link to={ROUTES.COMPLETED}>Đã hoàn thành<span style={countStyle}>2</span></Link></>}
+
+                <Menu.Item icon={<CheckCircleOutlined />} title="Đã hoàn thành">
+                    <Link to={ROUTES.COMPLETED}>{!collapsed && <>Đã hoàn thành<span style={countStyle}>2</span></>}</Link>
                 </Menu.Item>
             </Menu>
 
@@ -128,7 +134,7 @@ export const Sidebar: React.FC = () => {
                 onClose={() => setModalOpenSearch(false)}
             // onSubmit={handleAddTask}
             />
-        </Sider>
+        </Sider >
 
     );
 };

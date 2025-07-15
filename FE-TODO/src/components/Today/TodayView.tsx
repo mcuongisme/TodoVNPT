@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import {
+    Button,
     Typography,
 } from "antd";
 import {
@@ -16,21 +17,14 @@ export const TodayView = () => {
             <Title level={3}>Công việc hôm nay</Title>
             <span style={{ color: '#999' }}><FileDoneOutlined /> 2 tasks</span>
             <TodayList />
-            <div
-                style={{
-                    padding: "12px 0",
-                    color: "#a81f00",
-                    cursor: "pointer",
-                    fontWeight: 500,
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 6,
-                }}
+            <Button
+                type="link"
+                danger
+                icon={<PlusOutlined />}
                 onClick={() => setModalOpen(true)}
             >
-                <PlusOutlined />
                 Add task
-            </div>
+            </Button>
             <AddTaskModal
                 open={modalOpen}
                 onClose={() => setModalOpen(false)}

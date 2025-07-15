@@ -4,29 +4,27 @@ import {
     CommentOutlined,
     MoreOutlined,
     DragOutlined,
-} from "@ant-design/icons"; import { Checkbox, Space, Tooltip, Typography } from 'antd';
-import type { Task } from "../../types";
+    LoadingOutlined,
+} from "@ant-design/icons"; import { Checkbox, Flex, Space, Spin, Tooltip, Typography } from 'antd';
+import { useQuery } from "@apollo/client";
+import { GET_LIST_TASK } from "../../graphql/queries/taskQueries";
+import { LoadData } from "../Common/LoadData";
 const { Text } = Typography;
 
-const mockTasks: Task[] = [
-    {
-        id: 1,
-        title: "saa",
-        description: "saaá",
-        dueDate: "Monday",
-        completed: false,
-    },
-    {
-        id: 2,
-        title: "sd",
-        description: "ds",
-        completed: false,
-    },
-];
 export const InboxList = () => {
+    const { loading, error, data } = useQuery(GET_LIST_TASK, {
+        variables: {
+            sortKey: "createdAt",
+            sortValue: "desc",
+            currentPage: 1,
+            limitItem: 10,
+        },
+    });
+
+    if (loading || error) return <LoadData loading={loading} error={error} />;
     return (
         <div>
-            {mockTasks.map((task) => (
+            {data.getListTask.map((task: any) => (
                 <div
                     key={task.id}
                     style={{
@@ -46,12 +44,12 @@ export const InboxList = () => {
                     <div style={{ flex: 1, marginLeft: 12 }}>
                         <Text strong>{task.title}</Text>
                         <br />
-                        <Text type="secondary">{task.description}</Text>
+                        <Text type="secondary">{task.note}</Text>
 
-                        {task.dueDate && (
+                        {task.due_date && (
                             <div style={{ marginTop: 4 }}>
                                 <Text type="secondary" style={{ color: "#a81f00" }}>
-                                    📅 {task.dueDate}
+                                    📅 {task.due_date}
                                 </Text>
                             </div>
                         )}

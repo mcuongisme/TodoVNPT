@@ -1,26 +1,22 @@
 import React from 'react'
 import type { LabelItem } from '../../types';
-import { Collapse, Typography, Tooltip, Divider } from "antd";
+import { Collapse, Typography, Tooltip, Divider, Flex, Spin } from "antd";
 import {
-    PlusOutlined,
     TagOutlined,
-    FireOutlined,
-} from "@ant-design/icons";
-const { Panel } = Collapse;
-const { Text } = Typography;
 
-const labels: LabelItem[] = [
-    { name: "vccv", color: "#c471ab" },
-    { name: "vccv", color: "#c471ab" },
-];
+} from "@ant-design/icons";
+import { GET_LIST_LABEL } from '../../graphql/queries/labelQueries';
+import { useQuery } from '@apollo/client';
+import { LoadData } from '../Common/LoadData';
 export const LabelList = () => {
+    const { loading, error, data } = useQuery(GET_LIST_LABEL);
+    if (loading || error) return <LoadData loading={loading} error={error} />;
     return (
         <div>
-
-            {labels.map((label, idx) => (
+            {data.getListLabel.map((label: any) => (
                 <>
                     <div
-                        key={idx}
+                        key={label.id}
                         style={{
                             display: "flex",
                             alignItems: "center",
@@ -29,7 +25,7 @@ export const LabelList = () => {
 
                         }}
                     >
-                        <TagOutlined style={{ color: label.color || "#999" }} />
+                        <TagOutlined style={{ color: label.color }} />
                         <span>{label.name}</span>
                     </div>
                     <Divider size='small' />
