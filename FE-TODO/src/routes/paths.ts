@@ -15,11 +15,5 @@ export const ROUTES = {
         REGISTER: `${accPrefix}/register`,
         FORGOT: `${accPrefix}/forgot`,
         PROFILE: `${accPrefix}/profile`,
-    },
-
-    ADMIN: {
-        PREFIX: adminPrefix,
-        DASHBOARD: `${adminPrefix}/dashboard`,
-        USERS: `${adminPrefix}/users`,
-    },
+    }
 };
