@@ -7,7 +7,7 @@ export const typeDefsAuth = gql`
         name: String,
         created_at: String}
     type AuthPayload {
-        user: User!
+        user: User
         access_token: String
         refresh_token: String
     }

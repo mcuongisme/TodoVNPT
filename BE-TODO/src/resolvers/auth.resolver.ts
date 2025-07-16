@@ -6,7 +6,7 @@ import { Response } from 'express';
 
 
 const generateTokens = (user: any) => {
-    const access_token = jwt.sign({ id: user._id }, secretkey, { expiresIn: '15m' });
+    const access_token = jwt.sign({ id: user._id }, secretkey, { expiresIn: '15s' });
     const refresh_token = jwt.sign({ id: user._id }, refreshSecretKey, { expiresIn: '7d' });
     return { access_token, refresh_token };
 };

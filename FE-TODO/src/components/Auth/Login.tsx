@@ -1,15 +1,30 @@
 import React from 'react';
 import { Button, Divider, Form, Input, Typography } from 'antd';
-import { GoogleOutlined, FacebookFilled } from '@ant-design/icons';
+import { GoogleOutlined } from '@ant-design/icons';
 import { ROUTES } from '../../routes/paths';
+import { useMutation } from '@apollo/client';
+import { LOGIN_MUTATION } from '../../graphql/mutations/authMutations';
+import { useNavigate } from 'react-router-dom';
+import { useNotificationContext } from '../Common/NotificationProvider';
 
 const { Text, Link } = Typography;
 
 export const Login: React.FC = () => {
-    const onFinish = (values: any) => {
-        console.log('Success:', values);
-    };
+    const [login] = useMutation(LOGIN_MUTATION);
+    const navigate = useNavigate();
+    const { showNotification } = useNotificationContext();
+    const onFinish = async (values: any) => {
 
+        try {
+            const { data } = await login({ variables: values });
+
+            localStorage.setItem('access_token', data.login.access_token);
+            showNotification('Đăng nhập thành công', `Xin chào ${data.login.user.name}`, 'success');
+            navigate(ROUTES.TODAY);
+        } catch (error: any) {
+            showNotification('Lỗi đăng nhập', error.message || 'Vui lòng thử lại', 'error');
+        }
+    };
     return (
         <>
             <Button
@@ -36,9 +51,10 @@ export const Login: React.FC = () => {
                     <Button
                         color='danger'
                         variant="solid"
-                        htmlType="submit" block
+                        htmlType="submit"
+                        block
                         size='large'>
-                        Sign up with Email
+                        Log in
                     </Button>
                 </Form.Item>
             </Form>
