@@ -6,9 +6,8 @@ import { Response } from 'express';
 
 
 const generateTokens = (user: any) => {
-    const access_token = jwt.sign({ id: user._id }, secretkey, { expiresIn: '15s' });
-    const refresh_token = jwt.sign({ id: user._id }, refreshSecretKey, { expiresIn: '7d' });
-    return { access_token, refresh_token };
+    const access_token = jwt.sign({ id: user._id }, secretkey, { expiresIn: '1d' });
+    return { access_token };
 };
 export const resolversAuth = {
     Query: {
@@ -25,22 +24,15 @@ export const resolversAuth = {
         }
     },
     Mutation: {
-        register: async (_: any, { email, password, name }: any, { res }: { res: Response }) => {
+        register: async (_: any, { email, password, firstName, lastName }: any, { res }: { res: Response }) => {
             const hashedPassword = await bcrypt.hash(password, 10);
-            const user = new User({ email, password: hashedPassword, name });
+            const user = new User({ email, password: hashedPassword, firstName, lastName });
             await user.save();
 
-            const { access_token, refresh_token } = generateTokens(user);
+            const { access_token } = generateTokens(user);
 
-            res.cookie('refresh_token', refresh_token, {
-                httpOnly: true,
-                secure: true,
-                sameSite: 'strict',
-                path: '/refresh_token',
-                maxAge: 7 * 24 * 60 * 60 * 1000,
-            });
 
-            return { user, access_token, refresh_token };
+            return { user, access_token };
         },
 
         login: async (_: any, { email, password }: any, { res }: { res: Response }) => {
@@ -48,41 +40,12 @@ export const resolversAuth = {
             if (!user) throw new Error('User not found');
 
             const valid = await bcrypt.compare(password, user.password);
-            if (!valid) throw new Error('Invalid credentials');
+            if (!valid) throw new Error('Tài khoản hoặc mật khẩu không đúng');
 
-            const { access_token, refresh_token } = generateTokens(user);
+            const { access_token } = generateTokens(user);
 
-            res.cookie('refresh_token', refresh_token, {
-                httpOnly: true,
-                secure: true,
-                sameSite: 'strict',
-                path: '/refresh_token',
-                maxAge: 7 * 24 * 60 * 60 * 1000,
-            });
-
-            return { user, access_token, refresh_token };
+            return { user, access_token };
         },
-
-        refreshToken: async (_: any, __: any, context: any) => {
-            const token = context.req.cookies?.refresh_token;
-            if (!token) throw new Error('No refresh token');
-            try {
-                const decoded = jwt.verify(token, refreshSecretKey) as { id: string };
-                const user = await User.findById(decoded.id);
-                if (!user) throw new Error('User not found');
-
-                const access_token = jwt.sign({ id: user._id }, secretkey, { expiresIn: '15m' });
-                return { access_token };
-            } catch (err) {
-                throw new Error('Invalid refresh token');
-            }
-        },
-
-        logout: async (_: any, __: any, { res }: { res: Response }) => {
-            res.clearCookie('refresh_token', { path: '/refresh_token' });
-            return true;
-        }
-
 
     }
 }

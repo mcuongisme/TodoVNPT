@@ -4,27 +4,18 @@ import {
     CommentOutlined,
     MoreOutlined,
     DragOutlined,
-    LoadingOutlined,
-} from "@ant-design/icons"; import { Checkbox, Flex, Space, Spin, Tooltip, Typography } from 'antd';
-import { useQuery } from "@apollo/client";
-import { GET_LIST_TASK } from "../../graphql/queries/taskQueries";
+} from "@ant-design/icons"; import { Checkbox, Space, Spin, Tooltip, Typography } from 'antd';
 import { LoadData } from "../Common/LoadData";
+import { useGetTasks } from "../../hooks/useTasks";
 const { Text } = Typography;
 
 export const InboxList = () => {
-    const { loading, error, data } = useQuery(GET_LIST_TASK, {
-        variables: {
-            sortKey: "createdAt",
-            sortValue: "desc",
-            currentPage: 1,
-            limitItem: 10,
-        },
-    });
+    const { tasks, loading, error } = useGetTasks();
 
     if (loading || error) return <LoadData loading={loading} error={error} />;
     return (
         <div>
-            {data.getListTask.map((task: any) => (
+            {tasks.map((task: any) => (
                 <div
                     key={task.id}
                     style={{

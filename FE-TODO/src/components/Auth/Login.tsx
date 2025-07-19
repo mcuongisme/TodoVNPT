@@ -14,12 +14,10 @@ export const Login: React.FC = () => {
     const navigate = useNavigate();
     const { showNotification } = useNotificationContext();
     const onFinish = async (values: any) => {
-
         try {
             const { data } = await login({ variables: values });
-
             localStorage.setItem('access_token', data.login.access_token);
-            showNotification('Đăng nhập thành công', `Xin chào ${data.login.user.name}`, 'success');
+            showNotification('Đăng nhập thành công', `Xin chào ${data.login.user.lastName}`, 'success');
             navigate(ROUTES.TODAY);
         } catch (error: any) {
             showNotification('Lỗi đăng nhập', error.message || 'Vui lòng thử lại', 'error');

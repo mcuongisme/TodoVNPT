@@ -19,7 +19,6 @@ export const GET_LIST_TASK = gql`
       note
       due_date
       completed
-      createdAt
     }
   }
 `;

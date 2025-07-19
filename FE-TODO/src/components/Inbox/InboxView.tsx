@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+    Button,
     Typography,
 } from "antd";
 import {
@@ -12,28 +13,23 @@ const { Title } = Typography;
 
 export const InboxView: React.FC = () => {
     const [modalOpen, setModalOpen] = useState(false)
+
     return (
         <div style={{ padding: 24 }}>
             <Title level={3}>Hộp thư đến</Title>
             <InboxList />
-            <div
-                style={{
-                    padding: "12px 0",
-                    color: "#a81f00",
-                    cursor: "pointer",
-                    fontWeight: 500,
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 6,
-                }}
+            <Button
+                type="link"
+                danger
+                icon={<PlusOutlined />}
                 onClick={() => setModalOpen(true)}
             >
-                <PlusOutlined />
                 Add task
-            </div>
+            </Button>
             <AddTaskModal
                 open={modalOpen}
                 onClose={() => setModalOpen(false)}
+
             />
         </div>
     );

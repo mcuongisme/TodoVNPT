@@ -5,11 +5,25 @@ export const LOGIN_MUTATION = gql`
   mutation login($email: String, $password: String) {
     login(email: $email, password: $password) {
       access_token
-      refresh_token
       user {
         id
         email
-        name
+        firstName
+        lastName
+      }
+    }
+  }
+`;
+
+export const REGISTER_MUTATION = gql`
+  mutation register($email: String, $password: String, $firstName: String, $lastName: String) {
+    register(email: $email, password: $password, firstName: $firstName, lastName: $lastName) {
+      access_token
+      user {
+        id
+        email
+        firstName
+        lastName
       }
     }
   }

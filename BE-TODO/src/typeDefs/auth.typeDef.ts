@@ -2,14 +2,14 @@ import { gql } from 'apollo-server-express';
 
 export const typeDefsAuth = gql`
     type User {
-        id: ID,
-        email: String,
-        name: String,
+        id: ID
+        email: String
+        firstName: String
+        lastName: String
         created_at: String}
     type AuthPayload {
         user: User
         access_token: String
-        refresh_token: String
     }
 
     type AccessTokenPayload {
@@ -19,9 +19,7 @@ export const typeDefsAuth = gql`
         getCurrentUser: User,
     }
     type Mutation {
-        register(email: String, password: String, name: String): AuthPayload
+        register(email: String, password: String, firstName: String, lastName: String): AuthPayload
         login(email: String, password: String): AuthPayload
-        refreshToken: AccessTokenPayload
-        logout: Boolean
     }
 `;

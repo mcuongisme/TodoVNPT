@@ -8,7 +8,7 @@ import { setContext } from '@apollo/client/link/context';
 
 const httpLink = createHttpLink({
     uri: 'http://localhost:3000/graphql',
-    credentials: 'include', // Gửi cookie refresh_token mỗi lần request
+    credentials: 'include',
 });
 
 // Thêm access token vào header Authorization

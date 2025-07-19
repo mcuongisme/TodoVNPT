@@ -1,3 +1,6 @@
+import { client } from "../apollo/client";
+import { ROUTES } from "../routes/paths";
+
 export const isTokenExpired = (token: string): boolean => {
     try {
         const payload = JSON.parse(atob(token.split('.')[1]));
@@ -6,4 +9,11 @@ export const isTokenExpired = (token: string): boolean => {
     } catch {
         return true;
     }
+};
+
+
+export const logout = () => {
+    localStorage.removeItem('access_token');
+    client.clearStore();
+    window.location.href = ROUTES.ACCOUNT.LOGIN;
 };

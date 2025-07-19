@@ -33,4 +33,5 @@ export type TaskGroup = {
 export type ModalProps = {
     open: boolean;
     onClose: () => void;
+    refetchTasks?: () => void; // Optional refetch function for tasks
 }

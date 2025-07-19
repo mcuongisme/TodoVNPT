@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
     Modal,
     Input,
@@ -7,30 +7,61 @@ import {
     Dropdown,
     Menu,
     Select,
+    DatePicker,
+    message,
 } from "antd";
 import {
-    CalendarOutlined,
-    FlagOutlined,
     BellOutlined,
     MoreOutlined,
     InboxOutlined,
     ClockCircleOutlined,
     TagOutlined,
+    FlagFilled,
 } from "@ant-design/icons";
-import type { ModalProps } from "../../types";
+import type { ModalProps } from "../../types/index";
+import dayjs from "dayjs";
+import { useCreateTask } from "../../hooks/useTasks";
+import { useNotificationContext } from "../Common/NotificationProvider";
 const { TextArea } = Input;
-const { Option } = Select;
-
-
 
 const AddTaskModal: React.FC<ModalProps> = ({ open, onClose }) => {
+    const { handleCreateTask, loading, error } = useCreateTask();
+    const { showNotification } = useNotificationContext();
     const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
+    const [note, setNote] = useState("");
+    const [dueDate, setDueDate] = useState<dayjs.Dayjs | null>(null);
+    const [priority, setPriority] = useState<string>("P4");
 
-    const handleSubmit = () => {
-        setTitle("");
-        setDescription("");
-        onClose();
+    const handleChange = (value: string) => {
+        setPriority(value);
+        console.log(`selected ${value}`);
+    };
+
+    const handleSubmit = async () => {
+        if (!title.trim()) {
+            message.error("Please enter a task title.");
+            return;
+        }
+        const taskData = {
+            title: title.trim(),
+            note: note.trim() || undefined,
+            due_date: dueDate
+                ? dueDate.format("YYYY-MM-DD HH:mm:ss")
+                : undefined,
+            priority: priority,
+        };
+
+        try {
+            await handleCreateTask(taskData);
+            showNotification("Thêm công việc thành công", "Công việc đã được thêm vào danh sách", "success");
+            setTitle("");
+            setNote("");
+            setDueDate(null);
+            setPriority("P4");
+            onClose(); // Đóng modal sau khi thành công
+        } catch (err) {
+            showNotification("Thêm công việc thất bại", error?.message || "Vui lòng thử lại sau", "error");
+        }
     };
 
     const projectMenu = (
@@ -70,16 +101,63 @@ const AddTaskModal: React.FC<ModalProps> = ({ open, onClose }) => {
             />
             <TextArea
                 placeholder="Mô tả"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
                 bordered={false}
                 rows={2}
                 style={{ marginBottom: 16 }}
             />
 
             <Space style={{ marginBottom: 16 }}>
-                <Button icon={<CalendarOutlined />}>Date</Button>
-                <Button icon={<FlagOutlined />}>Priority</Button>
+                <DatePicker
+                    format="DD-MM-YYYY HH:mm:ss"
+                    minDate={dayjs()}
+                    placeholder="Chọn ngày"
+                    style={{ width: 120 }}
+                    showTime={{ defaultValue: dayjs("00:00:00", "HH:mm:ss") }}
+                    value={dueDate}
+                    onChange={(date) => setDueDate(date)}
+                />
+                <Select
+                    value={priority}
+                    style={{ width: 117 }}
+                    onChange={handleChange}
+                    popupMatchSelectWidth={false}
+                    options={[
+                        {
+                            value: "P1",
+                            label: (
+                                <>
+                                    <FlagFilled style={{ color: "#ff2121ff" }} /> Ưu tiên 1
+                                </>
+                            ),
+                        },
+                        {
+                            value: "P2",
+                            label: (
+                                <>
+                                    <FlagFilled style={{ color: "#3651ffff" }} /> Ưu tiên 2
+                                </>
+                            ),
+                        },
+                        {
+                            value: "P3",
+                            label: (
+                                <>
+                                    <FlagFilled style={{ color: "#fff454ff" }} /> Ưu tiên 3
+                                </>
+                            ),
+                        },
+                        {
+                            value: "P4",
+                            label: (
+                                <>
+                                    <FlagFilled style={{ color: "#888888ff" }} /> Ưu tiên 4
+                                </>
+                            ),
+                        },
+                    ]}
+                />
                 <Button icon={<BellOutlined />}>Reminders</Button>
                 <Dropdown overlay={moreMenu} trigger={["click"]}>
                     <Button icon={<MoreOutlined />} />
@@ -105,6 +183,8 @@ const AddTaskModal: React.FC<ModalProps> = ({ open, onClose }) => {
                         type="primary"
                         style={{ backgroundColor: "#a81f00", borderColor: "#a81f00" }}
                         onClick={handleSubmit}
+                        loading={loading}
+                        disabled={loading}
                     >
                         Add task
                     </Button>

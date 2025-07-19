@@ -11,7 +11,6 @@ import {
     PlusCircleFilled,
     ProjectOutlined,
     SearchOutlined,
-    BellFilled,
     BellOutlined,
 } from "@ant-design/icons";
 import styles from "./Sidebar.module.scss"
@@ -57,20 +56,23 @@ export const Sidebar: React.FC = () => {
                 {!collapsed && (
                     <UserInfo />
                 )}
-                <Tooltip title="Open Notification">
-                    <Button
-                        type="text"
-                        icon={<BellOutlined />}
-                        href={ROUTES.NOTIFICATIONS}
-                    />
-                </Tooltip>
-                <Tooltip title="Open/Close Sidebar">
-                    <Button
-                        type="text"
-                        icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-                        onClick={toggleCollapse}
-                    />
-                </Tooltip>
+                <div className={styles.button__right}>
+                    <Tooltip title="Open Notification">
+                        <Button
+                            type="text"
+                            icon={<BellOutlined />}
+                            href={ROUTES.NOTIFICATIONS}
+                        />
+                    </Tooltip>
+                    <Tooltip title="Open/Close Sidebar">
+                        <Button
+                            type="text"
+                            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                            onClick={toggleCollapse}
+                        />
+                    </Tooltip>
+                </div>
+
 
             </div>
             <Divider />

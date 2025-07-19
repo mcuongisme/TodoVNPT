@@ -5,10 +5,10 @@ export const typeDefsTask = gql`
         id: ID ,
         title: String,
         note: String,
+        priority: String,
         due_date: String,
         completed: Boolean,
-        createdAt: String,
-    }
+        created_by: String,}
     type Query {
         getListTask(
             sortKey: String, 
@@ -21,6 +21,10 @@ export const typeDefsTask = gql`
 
     input TaskInput {
         title: String
+        note: String,
+        priority: String,
+        due_date: String,
+        created_by: String,
     }
 
     type Mutation {
