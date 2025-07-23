@@ -4,7 +4,7 @@ import {
     CommentOutlined,
     MoreOutlined,
     DragOutlined,
-} from "@ant-design/icons"; import { Checkbox, Space, Spin, Tooltip, Typography } from 'antd';
+} from "@ant-design/icons"; import { Checkbox, Empty, Space, Spin, Tooltip, Typography } from 'antd';
 import { LoadData } from "../Common/LoadData";
 import { useGetTasks } from "../../hooks/useTasks";
 const { Text } = Typography;
@@ -13,6 +13,9 @@ export const InboxList = () => {
     const { tasks, loading, error } = useGetTasks();
 
     if (loading || error) return <LoadData loading={loading} error={error} />;
+    if (!tasks || tasks.length === 0) {
+        return <Empty description="Không có công việc nào" />;
+    }
     return (
         <div>
             {tasks.map((task: any) => (

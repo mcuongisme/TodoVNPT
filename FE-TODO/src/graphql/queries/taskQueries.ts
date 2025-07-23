@@ -22,3 +22,24 @@ export const GET_LIST_TASK = gql`
     }
   }
 `;
+
+
+export const GET_LIST_TASK_COMPLETED = gql`
+  query getListTaskCompleted(
+    $sortKey: String
+    $sortValue: String
+    $currentPage: Int
+    $limitItem: Int
+  ) {
+    getListTaskCompleted(
+      sortKey: $sortKey
+      sortValue: $sortValue
+      currentPage: $currentPage
+      limitItem: $limitItem
+    ) {
+      id
+      title
+      completed
+    }
+  }
+`;

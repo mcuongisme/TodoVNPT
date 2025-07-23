@@ -1,23 +1,40 @@
 import { Task } from "../model/task.model"
-
+import { getUserIdFromToken } from "../utils/auth";
 export const resolversTask = {
     Query: {
-        getListTask: async (_: any, args: any) => {
-
+        getListTask: async (_: any, args: any, context: any) => {
+            const userId = getUserIdFromToken(context.req);
             const { sortKey, sortValue, currentPage, limitItem } = args;
 
-            const sort: any = {}
-            if (sortKey && sortValue) {
-                sort[sortKey] = sortValue;
-            }
+            const sort: any = {};
+            if (sortKey && sortValue) sort[sortKey] = sortValue;
 
-            const skip = (currentPage - 1) * limitItem
+            const skip = (currentPage - 1) * limitItem;
+
             const tasks = await Task.find({
+                created_by: userId,
                 deleted: false
-            }).sort(sort).limit(limitItem).skip(skip)
+            }).sort(sort).limit(limitItem).skip(skip);
+
             return tasks;
         },
+        getListTaskCompleted: async (_: any, args: any, context: any) => {
+            const userId = getUserIdFromToken(context.req);
+            const { sortKey, sortValue, currentPage, limitItem } = args;
 
+            const sort: any = {};
+            if (sortKey && sortValue) sort[sortKey] = sortValue;
+
+            const skip = (currentPage - 1) * limitItem;
+
+            const tasks = await Task.find({
+                created_by: userId,
+                completed: true,
+                deleted: false
+            }).sort(sort).limit(limitItem).skip(skip);
+
+            return tasks;
+        },
         getTask: async (_: any, args: any) => {
             const { id } = args
             const task = await Task.findOne({
@@ -28,13 +45,19 @@ export const resolversTask = {
         }
     },
     Mutation: {
-        createTask: async (_: any, args: any) => {
+        createTask: async (_: any, args: any, context: any) => {
             const { task } = args;
-
-            const record = new Task(task)
-            await record.save();
-
-            return record;
+            try {
+                const userId = getUserIdFromToken(context.req);
+                const record = new Task({
+                    ...task,
+                    created_by: userId
+                })
+                await record.save();
+                return record;
+            } catch (error) {
+                throw new Error("Invalid token");
+            }
         },
 
         deleteTask: async (_: any, args: any) => {

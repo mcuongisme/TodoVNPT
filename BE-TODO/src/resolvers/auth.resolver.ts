@@ -1,7 +1,7 @@
 import { User } from "../model/user.model";
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import { secretkey, refreshSecretKey } from "..";
+import { secretkey } from "..";
 import { Response } from 'express';
 
 

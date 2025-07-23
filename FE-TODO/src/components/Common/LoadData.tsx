@@ -10,5 +10,5 @@ export const LoadData = ({ loading, error }: { loading: any, error: any }) => {
                 <Spin indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />} />
             </Flex>
         )
-    if (error) return <Empty />;
+    if (error) return <Empty description="Đã có lỗi xảy ra" />;
 }

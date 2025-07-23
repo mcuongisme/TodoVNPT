@@ -8,14 +8,20 @@ export const typeDefsTask = gql`
         priority: String,
         due_date: String,
         completed: Boolean,
-        created_by: String,}
+        created_by: String
+        }
     type Query {
         getListTask(
             sortKey: String, 
             sortValue: String,
             currentPage: Int = 1,
             limitItem: Int = 1,
-            ): [Task],    
+            ): [Task],
+        getListTaskCompleted(sortKey: String, 
+            sortValue: String,
+            currentPage: Int = 1,
+            limitItem: Int = 1,
+            ): [Task]    
         getTask(id: ID): Task,   
     }
 
@@ -30,7 +36,8 @@ export const typeDefsTask = gql`
     type Mutation {
         createTask(task: TaskInput) : Task,
         deleteTask(id:ID): String,
-        updateTask(id:ID, task: TaskInput): String
+        updateTask(id:ID, task: TaskInput): String,
+        
     }
 `
 

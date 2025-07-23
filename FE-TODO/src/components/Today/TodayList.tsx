@@ -5,7 +5,7 @@ import {
     MoreOutlined,
     DragOutlined,
     LoadingOutlined,
-} from "@ant-design/icons"; import { Checkbox, Flex, Space, Spin, Tooltip, Typography } from 'antd';
+} from "@ant-design/icons"; import { Checkbox, Empty, Flex, Space, Spin, Tooltip, Typography } from 'antd';
 import { useQuery } from "@apollo/client";
 import { GET_LIST_TASK } from "../../graphql/queries/taskQueries";
 import { LoadData } from "../Common/LoadData";
@@ -22,6 +22,9 @@ export const TodayList = () => {
     });
 
     if (loading || error) return <LoadData loading={loading} error={error} />;
+    if (!data || !data.getListTask || data.getListTask.length === 0) {
+        return <Empty description="Không có công việc nào trong ngày hôm nay" />;
+    }
     return (
         <div>
             {data.getListTask.map((task: any) => (

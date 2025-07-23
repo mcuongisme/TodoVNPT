@@ -9,6 +9,12 @@ export const ROUTES = {
     COMPLETED: '/completed',
     NOTIFICATIONS: '/notifications',
 
+    PROJECT: {
+        PREFIX: '/project',
+        LIST: '/project/list',
+        DETAIL: (id: string) => `/project/${id}`,
+    },
+
     ACCOUNT: {
         PREFIX: accPrefix,
         LOGIN: `${accPrefix}/login`,
