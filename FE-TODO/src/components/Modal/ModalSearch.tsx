@@ -29,7 +29,7 @@ export const ModalSearch: React.FC<ModalProps> = ({ open, onClose }) => {
             footer={null}
             closable={false}
             width={640}
-            bodyStyle={{ maxHeight: "70vh", overflowY: "auto", borderRadius: 12 }}
+            style={{ maxHeight: "70vh", overflowY: "auto", borderRadius: 12 }}
         >
             <Input
                 placeholder="Search or type a command..."

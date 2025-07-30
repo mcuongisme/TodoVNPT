@@ -8,9 +8,8 @@ export const LabelList = () => {
     return (
         <div>
             {labels.map((label: any) => (
-                <>
+                <div key={label.id}>
                     <div
-                        key={label.id}
                         style={{
                             display: "flex",
                             alignItems: "center",
@@ -22,7 +21,7 @@ export const LabelList = () => {
                         <span>{label.name}</span>
                     </div>
                     <Divider size='small' />
-                </>
+                </div>
 
             ))}
         </div>

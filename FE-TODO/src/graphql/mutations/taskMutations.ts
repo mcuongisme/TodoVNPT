@@ -12,3 +12,9 @@ export const CREATE_TASK = gql`
         }
     }
 `;
+
+export const UPDATE_TASK = gql`
+    mutation updateTask($id: ID!, $task: TaskInput!) {
+        updateTask(id: $id, task: $task)
+    }
+`;

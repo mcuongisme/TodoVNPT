@@ -16,11 +16,8 @@ const TaskSchema = new Schema({
         type: String
     },
     due_date: {
-        type: String,
-    },
-    custom_due_date: {
         type: Date,
-        default: null
+        default: Date.now
     },
     completed: {
         type: Boolean,
@@ -52,3 +49,7 @@ const TaskSchema = new Schema({
 });
 
 export const Task = model('Task', TaskSchema);
+
+function dayjs() {
+    throw new Error('Function not implemented.');
+}

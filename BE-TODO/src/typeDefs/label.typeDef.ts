@@ -10,4 +10,13 @@ export const typeDefsLabel = gql`
     type Query {
         getListLabel: [Label],
     }
+    input LabelInput {
+        name: String,
+        color: String,
+    }
+    type Mutation {
+        createLabel(label: LabelInput): Label,
+        updateLabel(id: ID!, label: LabelInput): Label,
+        deleteLabel(id: ID!): Boolean,
+    }
 `;

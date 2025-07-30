@@ -6,7 +6,17 @@ export const typeDefsProject = gql`
         name: String,
         description: String,
     }
+    
     type Query {
         getListProject: [Project],
+    }
+    input ProjectInput {
+        name: String,
+        description: String,
+    }
+    type Mutation {
+        createProject(project: ProjectInput): Project,
+        updateProject(id: ID!, name: String, description: String): Project,
+        deleteProject(id: ID!): Boolean,
     }
 `;

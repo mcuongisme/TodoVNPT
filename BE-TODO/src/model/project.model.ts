@@ -3,9 +3,10 @@ import { Schema, model, Types } from 'mongoose';
 const ProjectSchema = new Schema({
     name: {
         type: String,
-        required: true
     },
-    description: { type: String },
+    description: {
+        type: String
+    },
     parent_project_id: {
         type: String,
         ref: 'Project',
@@ -14,7 +15,6 @@ const ProjectSchema = new Schema({
     created_by: {
         type: String,
         ref: 'User',
-        required: true
     },
     is_expanded: {
         type: Boolean,

@@ -1,6 +1,7 @@
 import { gql } from 'apollo-server-express';
 
 export const typeDefsTask = gql`
+
     type Task {
         id: ID ,
         title: String,
@@ -22,7 +23,7 @@ export const typeDefsTask = gql`
             currentPage: Int = 1,
             limitItem: Int = 1,
             ): [Task]    
-        getTask(id: ID): Task,   
+        getTask(id: ID): Task,  
     }
 
     input TaskInput {

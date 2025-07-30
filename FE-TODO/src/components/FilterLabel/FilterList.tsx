@@ -17,9 +17,8 @@ export const FilterList = () => {
     return (
         <div>
             {filters.map((filter, idx) => (
-                <>
+                <div key={idx}>
                     <div
-                        key={idx}
                         style={{
                             display: "flex",
                             justifyContent: "space-between",
@@ -35,7 +34,7 @@ export const FilterList = () => {
                         ) : null}
                     </div>
                     <Divider size='small' />
-                </>
+                </div>
 
             ))}
         </div >
