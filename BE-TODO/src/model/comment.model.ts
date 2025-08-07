@@ -6,7 +6,7 @@ const CommentSchema = new Schema({
         required: true
     },
     task: {
-        type: Types.ObjectId,
+        type: String,
         ref: 'Task',
         required: true
     },

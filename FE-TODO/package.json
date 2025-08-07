@@ -14,6 +14,7 @@
     "@reduxjs/toolkit": "^2.8.2",
     "antd": "^5.26.3",
     "graphql": "^16.11.0",
+    "graphql-ws": "^6.0.6",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-redux": "^9.2.0",

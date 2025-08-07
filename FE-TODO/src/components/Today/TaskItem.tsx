@@ -13,16 +13,20 @@ import {
 import { useState } from "react";
 import dayjs from "dayjs";
 import { TaskEdit } from "./TaskEdit";
+import ModalComment from "../Modal/ModalComment";
 
 const { Text } = Typography;
 
 export const TaskItem = ({ task, onSave }: { task: any; onSave: (id: string, data: any) => void }) => {
     const [editing, setEditing] = useState(false);
+    const [openModalComment, setOpenModalComment] = useState(false);
     const [form, setForm] = useState({
         title: task.title,
         note: task.note,
         due_date: task.due_date ? dayjs(task.due_date) : null,
     });
+
+
 
     const handleChange = (field: string, value: any) => {
         setForm((prev) => ({ ...prev, [field]: value }));
@@ -92,7 +96,7 @@ export const TaskItem = ({ task, onSave }: { task: any; onSave: (id: string, dat
                             <TagOutlined style={{ cursor: "pointer" }} />
                         </Tooltip>
                         <Tooltip title="Comment">
-                            <CommentOutlined style={{ cursor: "pointer" }} />
+                            <CommentOutlined onClick={() => setOpenModalComment(true)} style={{ cursor: "pointer" }} />
                         </Tooltip>
                         <Tooltip title="More">
                             <MoreOutlined style={{ cursor: "pointer" }} />
@@ -100,6 +104,8 @@ export const TaskItem = ({ task, onSave }: { task: any; onSave: (id: string, dat
                     </Space>
                 )}
             </div>
+
+            <ModalComment open={openModalComment} taskId={task.id} taskTitle={task.title} onClose={() => setOpenModalComment(false)} />
         </>
     );
 };

@@ -1,7 +1,6 @@
 import { Express, Application, Response, Request } from 'express';
 import express from 'express';
 import cookieParser from 'cookie-parser';
-// import routes from './routes';
 import { connect } from './config/connectDB';
 import dotenv from 'dotenv';
 import { ApolloServer } from 'apollo-server-express';
@@ -15,6 +14,7 @@ const startServer = async () => {
     dotenv.config();
 
     const app = express() as any;
+
     // app.use(express.json());
     app.use(cors({
         origin: 'http://localhost:5173',

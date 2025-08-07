@@ -4,6 +4,21 @@ import { User } from '../model/user.model';
 import { getUserIdFromToken } from '../utils/auth';  // hàm lấy userId từ token
 
 export const resolversComment = {
+    Query: {
+        getListComment: async (_: any, args: any, context: any) => {
+            const { taskId } = args;
+
+            const comments = await Comment.find({
+                task: taskId,
+                deleted: false,
+            })
+                .populate('author', 'id name')
+                .populate('parent')
+                .sort({ created_at: 1 });
+
+            return comments;
+        }
+    },
     Mutation: {
         createComment: async (_: any, { input }: any, context: any) => {
             try {
