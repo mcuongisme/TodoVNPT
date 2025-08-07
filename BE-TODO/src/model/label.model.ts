@@ -11,7 +11,8 @@ const LabelSchema = new Schema({
     },
     created_by: {
         type: String,
-        ref: 'User', required: true
+        ref: 'User',
+        required: true
     },
     deleted: {
         type: Boolean,

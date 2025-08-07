@@ -49,8 +49,10 @@ export const resolversTask = {
             const { task } = args;
             try {
                 const userId = getUserIdFromToken(context.req);
+                const dueDate = task.due_date ? new Date(task.due_date) : undefined;
                 const record = new Task({
                     ...task,
+                    due_date: dueDate,
                     created_by: userId
                 })
                 await record.save();

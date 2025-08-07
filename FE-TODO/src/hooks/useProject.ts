@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@apollo/client';
-import { GET_LIST_PROJECT } from '../graphql/queries/projectQueries';
+import { GET_LIST_PROJECT, GET_PROJECT } from '../graphql/queries/projectQueries';
 import { CREATE_PROJECT } from '../graphql/mutations/projectMutations';
 
 export const useGetProjects = () => {
@@ -11,6 +11,18 @@ export const useGetProjects = () => {
     };
 };
 
+export const useGetProject = (id: string) => {
+    const { loading, error, data } = useQuery(GET_PROJECT, {
+        variables: {
+            id: id,
+        },
+    });
+    return {
+        data: data?.getProject || [],
+        loading,
+        error,
+    }
+}
 export const useCreateProject = () => {
     const [createProject, { loading, error }] = useMutation(CREATE_PROJECT,
         {

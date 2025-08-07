@@ -61,7 +61,11 @@ export const Sidebar: React.FC = () => {
                 ...(data?.map((project: any) => ({
                     key: project.id,
                     icon: <ProjectOutlined />,
-                    label: project.name,
+                    label: (
+                        <Link to={ROUTES.PROJECT.DETAIL(project.id)}>
+                            {project.name}
+                        </Link>
+                    )
                 })) || []),
 
             ],
@@ -203,10 +207,6 @@ export const Sidebar: React.FC = () => {
                     items={items}
                 />
             </ConfigProvider>
-
-
-
-
 
 
             <AddTaskModal

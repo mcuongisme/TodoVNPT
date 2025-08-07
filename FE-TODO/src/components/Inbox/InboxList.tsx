@@ -7,6 +7,7 @@ import {
 } from "@ant-design/icons"; import { Checkbox, Empty, Space, Spin, Tooltip, Typography } from 'antd';
 import { LoadData } from "../Common/LoadData";
 import { useGetTasks } from "../../hooks/useTasks";
+import dayjs from "dayjs";
 const { Text } = Typography;
 
 export const InboxList = () => {
@@ -43,7 +44,7 @@ export const InboxList = () => {
                         {task.due_date && (
                             <div style={{ marginTop: 4 }}>
                                 <Text type="secondary" style={{ color: "#a81f00" }}>
-                                    📅 {task.due_date}
+                                    📅 {dayjs(Number(task.due_date)).format('DD-MM-YYYY HH:mm')}
                                 </Text>
                             </div>
                         )}

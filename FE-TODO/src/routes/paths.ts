@@ -6,13 +6,14 @@ export const ROUTES = {
     TODAY: '/today',
     UPCOMING: '/upcoming',
     LABEL_FILTER: '/labels-filters',
+    LABEL: (id: string) => `/label/${id}`,
     COMPLETED: '/completed',
     NOTIFICATIONS: '/notifications',
 
     PROJECT: {
         PREFIX: '/project',
-        LIST: '/project/list',
         DETAIL: (id: string) => `/project/${id}`,
+        INVITE: 'projects/join/:token'
     },
 
     ACCOUNT: {

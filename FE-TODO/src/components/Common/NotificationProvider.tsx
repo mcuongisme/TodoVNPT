@@ -26,7 +26,7 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
     api[type]({
       message,
       description,
-      placement: 'topRight',
+      placement: 'bottomRight',
       duration: 4,
       showProgress: true,
       pauseOnHover: true,

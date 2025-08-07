@@ -13,6 +13,9 @@ import MainLayout from './components/Common/MainLayout';
 import { AuthLayout } from './components/Auth/AuthLayout';
 import { Signup } from './components/Auth/Signup';
 import { ForgotPassword } from './components/Auth/ForgotPassword';
+import { ProjectView } from './components/MyProject/ProjectView';
+import { JoinProjectPage } from './components/MyProject/JoinProjectPage';
+import { LabelTaskList } from './components/FilterLabel/LabelTaskList';
 
 const App: React.FC = () => {
   return (
@@ -30,6 +33,9 @@ const App: React.FC = () => {
           <Route path={ROUTES.LABEL_FILTER} element={<LabelFilter />} />
           <Route path={ROUTES.COMPLETED} element={<CompletedView />} />
           <Route path={ROUTES.NOTIFICATIONS} element={<NotificationView />} />
+          <Route path={ROUTES.PROJECT.INVITE} element={<JoinProjectPage />} />
+          <Route path={ROUTES.PROJECT.DETAIL(":id")} element={<ProjectView />} />
+          <Route path={ROUTES.LABEL(":id")} element={<LabelTaskList />} />
         </Route>
       </Routes>
     </Router>

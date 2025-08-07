@@ -7,8 +7,22 @@ export const typeDefsLabel = gql`
         color: String,
         createdAt: String,
     }
+    type Task {
+        id: ID
+        title: String
+        note: String
+    }    
+    type TaskLabel {
+        id: ID
+        label_id: ID
+        task_id: ID
+        deleted: Boolean
+        task: Task
+    }
     type Query {
         getListLabel: [Label],
+        getListTaskLabel(labelId: String!): [Task]
+        labelName(labelId: String!): String
     }
     input LabelInput {
         name: String,

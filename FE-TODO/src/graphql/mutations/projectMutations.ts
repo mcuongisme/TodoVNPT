@@ -9,3 +9,18 @@ export const CREATE_PROJECT = gql`
         }
     }
 `;
+
+export const GENERATE_INVITE_LINK = gql`
+  mutation GenerateInviteLink($projectId: ID!) {
+    generateProjectInviteLink(projectId: $projectId)
+  }
+`;
+
+export const JOIN_PROJECT = gql`
+  mutation joinProject($token: String!) {
+    joinProject(token: $token) {
+      id
+      name
+    }
+  }
+`;

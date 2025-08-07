@@ -34,7 +34,6 @@ const AddTaskModal: React.FC<ModalProps> = ({ open, onClose }) => {
 
     const handleChange = (value: string) => {
         setPriority(value);
-        console.log(`selected ${value}`);
     };
 
     const handleSubmit = async () => {
@@ -58,7 +57,7 @@ const AddTaskModal: React.FC<ModalProps> = ({ open, onClose }) => {
             setNote("");
             setDueDate(null);
             setPriority("P4");
-            onClose(); // Đóng modal sau khi thành công
+            onClose();
         } catch (err) {
             showNotification("Thêm công việc thất bại", error?.message || "Vui lòng thử lại sau", "error");
         }

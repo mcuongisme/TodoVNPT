@@ -1,16 +1,40 @@
-import { create } from "domain";
 import { Label } from "../model/label.model";
 import { getUserIdFromToken } from "../utils/auth";
+import { TaskLabel } from "../model/task-label.model";
+import { Task } from "../model/task.model";
 
 export const resolversLabel = {
     Query: {
-        getListLabel: async (_: any, args: any) => {
+        getListLabel: async (_: any, args: any, context: any) => {
+            const userId = getUserIdFromToken(context.req);
             const labels = await Label.find({
-                deleted: false
+                deleted: false,
+                created_by: userId
             }).sort({ created_at: -1 });
             return labels;
         },
+        getListTaskLabel: async (_: any, { labelId }: { labelId: string }) => {
+            const taskLabels = await TaskLabel.find({
+                label_id: labelId,
+                deleted: false,
+            });
+
+            const taskIds = taskLabels.map((tl: any) => tl.task_id);
+
+            const tasks = await Task.find({
+                _id: { $in: taskIds },
+                deleted: false, // nếu bạn có field này
+            });
+
+            return tasks;
+        },
+        labelName: async (_: any, { labelId }: any) => {
+            const label = await Label.findById(labelId);
+            return label?.name || null;
+        }
     },
+
+
     Mutation: {
         createLabel: async (_: any, args: any, context: any) => {
             try {

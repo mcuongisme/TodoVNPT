@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import {
     Button,
+    Divider,
     Typography,
 } from "antd";
 import {
@@ -14,8 +15,10 @@ export const TodayView = () => {
     const [modalOpen, setModalOpen] = useState(false)
     return (
         <div style={{ padding: 24 }}>
+            <Title level={3}>Công việc trễ</Title>
+            <TodayList />
+            <Divider />
             <Title level={3}>Công việc hôm nay</Title>
-            <span style={{ color: '#999' }}><FileDoneOutlined /> 2 tasks</span>
             <TodayList />
             <Button
                 type="link"

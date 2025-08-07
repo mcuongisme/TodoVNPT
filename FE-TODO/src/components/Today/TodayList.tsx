@@ -2,6 +2,7 @@ import { Empty } from "antd";
 import { useGetTasks } from "../../hooks/useTasks";
 import { LoadData } from "../Common/LoadData";
 import { TaskItem } from "./TaskItem";
+import { FileDoneOutlined } from "@ant-design/icons";
 
 export const TodayList = () => {
     const { loading, error, tasks } = useGetTasks();
@@ -16,6 +17,7 @@ export const TodayList = () => {
 
     return (
         <div>
+            <span style={{ color: '#999' }}><FileDoneOutlined />  {tasks?.length || 0} công việc</span>
             {tasks.map((task: any) => (
                 <TaskItem key={task.id} task={task} onSave={handleSave} />
             ))}

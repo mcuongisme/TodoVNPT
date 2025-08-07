@@ -19,6 +19,7 @@ export const useGetTasks = () => {
     };
 }
 
+
 export const useGetTasksCompleted = () => {
     const { loading, error, data } = useQuery(GET_LIST_TASK_COMPLETED, {
         variables: {
