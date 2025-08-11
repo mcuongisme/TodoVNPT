@@ -13,7 +13,7 @@ const CommentSchema = new Schema({
     author: {
         type: Types.ObjectId,
         ref: 'User',
-        required: true
+        required: false
     },
     parent: {
         type: Types.ObjectId,

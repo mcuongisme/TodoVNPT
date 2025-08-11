@@ -19,7 +19,8 @@
     "react-dom": "^19.1.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.6.3",
-    "scss": "^0.2.4"
+    "scss": "^0.2.4",
+    "subscriptions-transport-ws": "^0.11.0"
   },
   "devDependencies": {
     "@apollo/client": "^3.13.8",

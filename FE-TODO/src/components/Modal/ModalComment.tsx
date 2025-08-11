@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { Modal, Tabs, Input, Button, Avatar, Upload, message } from 'antd';
 import { PaperClipOutlined, AudioOutlined, SmileOutlined } from '@ant-design/icons';
-import { useComment } from '../../hooks/useComment';
+import { useComment, useCommentRealtime } from '../../hooks/useComment';
 import { CommentList } from '../Comment/CommentList';
 
-const { TabPane } = Tabs;
 const { TextArea } = Input;
 
 interface ModalCommentProps {

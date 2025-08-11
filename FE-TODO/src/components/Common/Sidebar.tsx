@@ -94,16 +94,16 @@ export const Sidebar: React.FC = () => {
                 </>
             ),
         },
-        {
-            key: 'inbox',
-            icon: <InboxOutlined />,
-            title: 'Hộp thư đến',
-            label: (
-                <Link to={ROUTES.INBOX}>
-                    {!collapsed && <>Hộp thư đến<span style={countStyle}>12</span></>}
-                </Link>
-            ),
-        },
+        // {
+        //     key: 'inbox',
+        //     icon: <InboxOutlined />,
+        //     title: 'Hộp thư đến',
+        //     label: (
+        //         <Link to={ROUTES.INBOX}>
+        //             {!collapsed && <>Hộp thư đến<span style={countStyle}>12</span></>}
+        //         </Link>
+        //     ),
+        // },
         {
             key: 'today',
             icon: <CalendarOutlined />,
@@ -114,16 +114,16 @@ export const Sidebar: React.FC = () => {
                 </Link>
             ),
         },
-        {
-            key: 'upcoming',
-            icon: <ClockCircleOutlined />,
-            title: 'Sắp tới',
-            label: (
-                <Link to={ROUTES.UPCOMING}>
-                    {!collapsed && <>Sắp tới<span style={countStyle}>7</span></>}
-                </Link>
-            ),
-        },
+        // {
+        //     key: 'upcoming',
+        //     icon: <ClockCircleOutlined />,
+        //     title: 'Sắp tới',
+        //     label: (
+        //         <Link to={ROUTES.UPCOMING}>
+        //             {!collapsed && <>Sắp tới<span style={countStyle}>7</span></>}
+        //         </Link>
+        //     ),
+        // },
         {
             key: 'labels-filters',
             icon: <TagsOutlined />,

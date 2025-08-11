@@ -1,7 +1,8 @@
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation, useQuery, useSubscription } from '@apollo/client';
 import { CREATE_COMMENT } from '../graphql/mutations/commentMutations';
 import { useState } from 'react';
 import { GET_LIST_COMMENT } from '../graphql/queries/commentQueries';
+import { COMMENT_ADDED } from '../graphql/subscription/commentSubcriptions';
 
 export const useComment = () => {
     const [createComment, { loading, error }] = useMutation(CREATE_COMMENT);
@@ -51,3 +52,13 @@ export const useGetListComment = (taskId: string) => {
         error,
     };
 };
+
+export const useCommentRealtime = (taskId: string) => {
+    const { data } = useSubscription(COMMENT_ADDED, {
+        variables: { taskId },
+    });
+
+    return {
+        commentrt: data?.commentAdded || [],
+    };
+}

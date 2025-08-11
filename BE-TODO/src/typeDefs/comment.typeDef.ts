@@ -11,7 +11,7 @@ export const typeDefsComment = gql`
         id: ID!
         content: String!
         task: Task!
-        author: User!
+        author: User
         parent: Comment
         created_at: String!
         updated_at: String!
