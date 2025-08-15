@@ -16,6 +16,7 @@ import { ForgotPassword } from './components/Auth/ForgotPassword';
 import { ProjectView } from './components/MyProject/ProjectView';
 import { JoinProjectPage } from './components/MyProject/JoinProjectPage';
 import { LabelTaskList } from './components/FilterLabel/LabelTaskList';
+import { UserInfoLayout } from './components/User/UserInfoLayout';
 
 const App: React.FC = () => {
   return (
@@ -36,6 +37,7 @@ const App: React.FC = () => {
           <Route path={ROUTES.PROJECT.INVITE} element={<JoinProjectPage />} />
           <Route path={ROUTES.PROJECT.DETAIL(":id")} element={<ProjectView />} />
           <Route path={ROUTES.LABEL(":id")} element={<LabelTaskList />} />
+          <Route path={ROUTES.ACCOUNT.PROFILE} element={<UserInfoLayout />} />
         </Route>
       </Routes>
     </Router>

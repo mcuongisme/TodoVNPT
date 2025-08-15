@@ -18,3 +18,12 @@ export const UPDATE_TASK = gql`
         updateTask(id: $id, task: $task)
     }
 `;
+
+export const UPDATE_TASK_COMPLETED = gql`
+    mutation updateTaskCompleted($id: ID!, $completed: Boolean!) {
+        updateTaskCompleted(id: $id, completed: $completed) {
+            id
+            completed
+        }
+    }
+`;

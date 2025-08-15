@@ -34,6 +34,8 @@ export const ModalAddProject: React.FC<ModalProps> = ({ open, onClose }) => {
         }
     };
 
+
+
     return (
         <Modal
             title="Add Project"

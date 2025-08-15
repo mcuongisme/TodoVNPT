@@ -60,6 +60,23 @@ export const resolversLabel = {
             const { id } = args;
             await Label.findByIdAndDelete(id);
             return true;
+        },
+        addTaskToLabel: async (_: any, { labelId, taskId }: { labelId: string, taskId: string }) => {
+            const newTaskLabel = new TaskLabel({
+                label_id: labelId,
+                task_id: taskId,
+                deleted: false
+            });
+            await newTaskLabel.save();
+            return newTaskLabel;
+        },
+        removeTaskFromLabel: async (_: any, { labelId, taskId }: { labelId: string, taskId: string }) => {
+            const result = await TaskLabel.findOneAndUpdate(
+                { label_id: labelId, task_id: taskId, deleted: false },
+                { deleted: true },
+                { new: true }
+            );
+            return !!result; // trả về true nếu tìm thấy và cập nhật thành công
         }
     }
 

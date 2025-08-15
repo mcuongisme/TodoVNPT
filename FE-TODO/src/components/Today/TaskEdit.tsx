@@ -8,7 +8,7 @@ import {
 } from "antd";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
-
+import { useUpdateTask } from "../../hooks/useTasks";
 
 export const TaskEdit = ({ task, onClose, onSave }: any) => {
     const moreMenu = (
@@ -17,6 +17,7 @@ export const TaskEdit = ({ task, onClose, onSave }: any) => {
             <Menu.Item icon={<ClockCircleOutlined />}>Deadline</Menu.Item>
         </Menu>
     );
+    const { handleUpdateTask, loading, error } = useUpdateTask();
     const [dueDate, setDueDate] = useState<dayjs.Dayjs | null>(null);
     const [priority, setPriority] = useState<string>("P4");
     const [form, setForm] = useState({
@@ -43,8 +44,21 @@ export const TaskEdit = ({ task, onClose, onSave }: any) => {
         setForm((prev) => ({ ...prev, [field]: value }));
     };
 
-    const handleSubmit = () => {
-        onSave({ ...task, ...form });
+    const handleSubmit = async () => {
+        const updatedTask = {
+            title: form.title,
+            note: form.note,
+            due_date: dueDate ? dueDate.toISOString() : null,
+            priority,
+            // reminder: form.reminder
+        };
+
+        try {
+            await handleUpdateTask(task.id, updatedTask);
+            onSave({ ...task, ...updatedTask }); // Cập nhật UI local
+        } catch (err) {
+            console.error("Update task error:", err);
+        }
     };
 
     return (

@@ -5,11 +5,12 @@ import { GET_CURRENT_USER } from '../../graphql/queries/userQueries';
 import { useQuery } from '@apollo/client';
 import { LoadData } from './LoadData';
 import { logout } from '../../utils/auth';
+import { ROUTES } from '../../routes/paths';
 const items: MenuProps['items'] = [
     {
         key: '1',
         label: (
-            <a rel="noopener noreferrer" href="/user-info">
+            <a rel="noopener noreferrer" href={ROUTES.ACCOUNT.PROFILE}>
                 Thông tin cá nhân
             </a>
         )

@@ -59,6 +59,6 @@ export const useCommentRealtime = (taskId: string) => {
     });
 
     return {
-        commentrt: data?.commentAdded || [],
+        commentrt: data?.commentAdded ?? null, // không trả [] nữa
     };
-}
+};

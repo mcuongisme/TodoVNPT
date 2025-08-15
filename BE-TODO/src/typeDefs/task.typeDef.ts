@@ -38,7 +38,7 @@ export const typeDefsTask = gql`
         createTask(task: TaskInput) : Task,
         deleteTask(id:ID): String,
         updateTask(id:ID, task: TaskInput): String,
-        
+        updateTaskCompleted(id: ID!, completed: Boolean!): Task
     }
 `
 

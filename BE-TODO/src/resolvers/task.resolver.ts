@@ -13,6 +13,7 @@ export const resolversTask = {
 
             const tasks = await Task.find({
                 created_by: userId,
+                completed: false,
                 deleted: false
             }).sort(sort).limit(limitItem).skip(skip);
 
@@ -82,7 +83,17 @@ export const resolversTask = {
                 _id: id
             }, task)
 
-            return "Thay đổi thành thụ";
+            return "Thay đổi thành công";
+        },
+        updateTaskCompleted: async (_: any, args: any) => {
+            const { id, completed } = args;
+            const task = await Task.findById(id); // Sequelize ví dụ
+            if (!task) throw new Error("Task not found");
+
+            task.completed = completed;
+            await task.save();
+
+            return task;
         }
     }
 }

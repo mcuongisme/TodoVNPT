@@ -28,3 +28,22 @@ export const REGISTER_MUTATION = gql`
     }
   }
 `;
+
+export const CHANGE_PASSWORD_MUTATION = gql`
+  mutation changePassword($currentPassword: String!, $newPassword: String!) {
+    changePassword(currentPassword: $currentPassword, newPassword: $newPassword) {
+      access_token
+    }
+  }
+`;
+
+export const CHANGE_INFO_MUTATION = gql`
+  mutation changeInfo($firstName: String!, $lastName: String!) {
+    changeInfo(firstName: $firstName, lastName: $lastName) {
+      id
+      email
+      firstName
+      lastName
+    }
+  }
+`;

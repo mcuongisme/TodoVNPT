@@ -6,13 +6,21 @@ export const CommentList = ({ taskId }: { taskId: string }) => {
     const { comments, loading, error } = useGetListComment(taskId);
     const { commentrt } = useCommentRealtime(taskId);
 
-    const allComments = React.useMemo(() => {
-        if (!commentrt) return comments;
-        if (Array.isArray(commentrt)) {
-            return [...comments, ...commentrt];
+    const [realtimeComments, setRealtimeComments] = React.useState<any[]>([]);
+
+    React.useEffect(() => {
+        if (commentrt) {
+            setRealtimeComments(prev => {
+                // tránh thêm trùng id
+                if (prev.some(c => c.id === commentrt.id)) return prev;
+                return [...prev, commentrt];
+            });
         }
-        return [...comments, commentrt];
-    }, [comments, commentrt]);
+    }, [commentrt]);
+
+    const allComments = React.useMemo(() => {
+        return [...comments, ...realtimeComments];
+    }, [comments, realtimeComments]);
 
     return (
         <div>

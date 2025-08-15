@@ -110,7 +110,7 @@ export const Sidebar: React.FC = () => {
             title: 'Hôm nay',
             label: (
                 <Link to={ROUTES.TODAY}>
-                    {!collapsed && <>Hôm nay<span style={countStyle}>5</span></>}
+                    {!collapsed && <>Công việc hôm nay<span style={countStyle}>5</span></>}
                 </Link>
             ),
         },
@@ -127,10 +127,10 @@ export const Sidebar: React.FC = () => {
         {
             key: 'labels-filters',
             icon: <TagsOutlined />,
-            title: 'Nhãn & bộ lọc',
+            title: 'Nhãn',
             label: (
                 <Link to={ROUTES.LABEL_FILTER}>
-                    {!collapsed && <>Nhãn & bộ lọc<span style={countStyle}>2</span></>}
+                    {!collapsed && <>Nhãn<span style={countStyle}>2</span></>}
                 </Link>
             ),
         },

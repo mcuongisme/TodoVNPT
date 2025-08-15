@@ -32,5 +32,7 @@ export const typeDefsLabel = gql`
         createLabel(label: LabelInput): Label,
         updateLabel(id: ID!, label: LabelInput): Label,
         deleteLabel(id: ID!): Boolean,
+        addTaskToLabel(labelId: ID!, taskId: ID!): TaskLabel,
+        removeTaskFromLabel(labelId: ID!, taskId: ID!): Boolean
     }
 `;

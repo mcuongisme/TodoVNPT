@@ -1,7 +1,6 @@
 // components/NotificationProvider.tsx
 import React, { createContext, useContext } from 'react';
 import { notification } from 'antd';
-import type { NotificationArgsProps } from 'antd';
 
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
 

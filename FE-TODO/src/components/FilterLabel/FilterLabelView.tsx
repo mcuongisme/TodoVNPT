@@ -13,22 +13,8 @@ export const LabelFilter: React.FC = () => {
     const handleOpen = () => setOpen(true);
     const items = [
         {
-            key: "filters",
-            label: (
-                <Space>
-                    <Text strong>Filters</Text>
-                </Space>
-            ),
-            children: <FilterList />,
-            extra: (
-                <Tooltip title="Add filter">
-                    <PlusOutlined style={{ fontSize: 14 }} />
-                </Tooltip>
-            ),
-        },
-        {
             key: "labels",
-            label: <Text strong>Labels</Text>,
+            label: <Text strong>Nhãn</Text>,
             children: <LabelList />,
             extra: (
                 <Tooltip title="Add label">
@@ -41,7 +27,7 @@ export const LabelFilter: React.FC = () => {
     return (
         <>
             <div style={{ padding: 24 }}>
-                <Title level={3}>Filters & Labels</Title>
+                <Title level={3}>Danh sách nhãn</Title>
                 <Collapse ghost defaultActiveKey={["filters", "labels"]} items={items} />
             </div>
             <ModalAddLabel open={open} onClose={onClose} />

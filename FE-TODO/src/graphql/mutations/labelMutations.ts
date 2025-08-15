@@ -10,3 +10,18 @@ export const CREATE_LABEL = gql`
     }
 `;
 
+export const ADD_TASK_TO_LABEL = gql`
+    mutation addTaskToLabel($labelId: ID!, $taskId: ID!) {
+        addTaskToLabel(labelId: $labelId, taskId: $taskId) {
+            id
+            label_id
+            task_id
+            deleted
+            task {
+                id
+                title
+                note
+            } 
+        }
+    }
+`;

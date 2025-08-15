@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_LIST_LABEL, GET_TASK_BY_LABEL } from '../graphql/queries/labelQueries';
-import { CREATE_LABEL } from '../graphql/mutations/labelMutations';
+import { ADD_TASK_TO_LABEL, CREATE_LABEL } from '../graphql/mutations/labelMutations';
 
 export const useLabels = () => {
     const { loading, error, data } = useQuery(GET_LIST_LABEL);
@@ -10,6 +10,7 @@ export const useLabels = () => {
         error,
     };
 };
+
 export const useGetTaskByLabel = (labelId: string) => {
     const { loading, error, data } = useQuery(GET_TASK_BY_LABEL, {
         variables: {
@@ -23,7 +24,6 @@ export const useGetTaskByLabel = (labelId: string) => {
         error,
     }
 }
-
 
 export const useCreateLabel = () => {
     const [createLabel, { loading, error }] = useMutation(CREATE_LABEL,
@@ -51,3 +51,28 @@ export const useCreateLabel = () => {
 
     return { handleCreateLabel, loading, error };
 }
+
+export const useAddTaskToLabel = () => {
+    const [addTaskToLabel, { loading, error }] = useMutation(ADD_TASK_TO_LABEL, {
+        refetchQueries: [
+            {
+                query: GET_LIST_LABEL
+            }
+        ],
+        awaitRefetchQueries: true
+    });
+
+    const handleAddTaskToLabel = async (labelId: string, taskId: string) => {
+        try {
+            const { data } = await addTaskToLabel({
+                variables: { labelId, taskId },
+            });
+            return data.addTaskToLabel;
+        } catch (err) {
+            console.error("Error adding task to label:", err);
+            throw err;
+        }
+    };
+
+    return { handleAddTaskToLabel, loading, error };
+};

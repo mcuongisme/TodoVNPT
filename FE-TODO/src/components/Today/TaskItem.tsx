@@ -14,19 +14,21 @@ import { useState } from "react";
 import dayjs from "dayjs";
 import { TaskEdit } from "./TaskEdit";
 import ModalComment from "../Modal/ModalComment";
+import { useUpdateTaskCompleted } from "../../hooks/useTasks";
+import { ModalAddTaskToLabel } from "../Modal/ModalAddTaskToLabel";
 
 const { Text } = Typography;
 
 export const TaskItem = ({ task, onSave }: { task: any; onSave: (id: string, data: any) => void }) => {
+    const { handleUpdateTaskCompleted, loading } = useUpdateTaskCompleted();
     const [editing, setEditing] = useState(false);
     const [openModalComment, setOpenModalComment] = useState(false);
+    const [openModalAddToLabel, setOpenModalAddToLabel] = useState(false);
     const [form, setForm] = useState({
         title: task.title,
         note: task.note,
         due_date: task.due_date ? dayjs(task.due_date) : null,
     });
-
-
 
     const handleChange = (field: string, value: any) => {
         setForm((prev) => ({ ...prev, [field]: value }));
@@ -46,6 +48,8 @@ export const TaskItem = ({ task, onSave }: { task: any; onSave: (id: string, dat
         setEditing(false);
     };
 
+
+
     return (
         <>
             <div
@@ -58,7 +62,13 @@ export const TaskItem = ({ task, onSave }: { task: any; onSave: (id: string, dat
                 }}
             >
 
-                <Checkbox checked={task.completed} style={{ marginTop: 4 }} disabled />
+                <Checkbox
+                    checked={task.completed}
+                    style={{ marginTop: 4 }}
+                    disabled={loading}
+                    onChange={(e) =>
+                        handleUpdateTaskCompleted(task.id, e.target.checked)
+                    } />
 
                 <div style={{ flex: 1, marginLeft: 12 }}>
                     {editing ? (
@@ -93,7 +103,7 @@ export const TaskItem = ({ task, onSave }: { task: any; onSave: (id: string, dat
                             <EditOutlined style={{ cursor: "pointer" }} onClick={() => setEditing(true)} />
                         </Tooltip>
                         <Tooltip title="Tag">
-                            <TagOutlined style={{ cursor: "pointer" }} />
+                            <TagOutlined style={{ cursor: "pointer" }} onClick={() => setOpenModalAddToLabel(true)} />
                         </Tooltip>
                         <Tooltip title="Comment">
                             <CommentOutlined onClick={() => setOpenModalComment(true)} style={{ cursor: "pointer" }} />
@@ -106,6 +116,16 @@ export const TaskItem = ({ task, onSave }: { task: any; onSave: (id: string, dat
             </div>
 
             <ModalComment open={openModalComment} taskId={task.id} taskTitle={task.title} onClose={() => setOpenModalComment(false)} />
+
+            <ModalAddTaskToLabel open={openModalAddToLabel}
+                onClose={() => setOpenModalAddToLabel(false)}
+                onSave={(labels: string[]) => {
+                    console.log("Selected labels:", labels);
+                }}
+                taskId={task.id}
+            />
+
+
         </>
     );
 };

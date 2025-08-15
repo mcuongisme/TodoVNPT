@@ -46,6 +46,44 @@ export const resolversAuth = {
 
             return { user, access_token };
         },
+        changePassword: async (_: any, { currentPassword, newPassword }: any, context: any) => {
+            const token = context.req.headers.authorization?.split(' ')[1];
+            if (!token) throw new Error("Authentication token is required");
+
+            try {
+                const decoded = jwt.verify(token, secretkey) as JwtPayload;
+                const user = await User.findById(decoded.id);
+                if (!user) throw new Error("User not found");
+
+                const valid = await bcrypt.compare(currentPassword, user.password);
+                if (!valid) throw new Error("Current password is incorrect");
+
+                user.password = await bcrypt.hash(newPassword, 10);
+                await user.save();
+
+                const { access_token } = generateTokens(user);
+                return { access_token };
+            } catch (error) {
+                throw new Error("Invalid token");
+            }
+        },
+        changeInfo: async (_: any, { firstName, lastName }: any, context: any) => {
+            const token = context.req.headers.authorization?.split(' ')[1];
+            if (!token) throw new Error("Authentication token is required");
+
+            try {
+                const decoded = jwt.verify(token, secretkey) as JwtPayload;
+                const user = await User.findById(decoded.id);
+                if (!user) throw new Error("User not found");
+
+                user.firstName = firstName;
+                user.lastName = lastName;
+                await user.save();
+                return user;
+            } catch (error) {
+                throw new Error("Invalid token");
+            }
+        }
 
     }
 }
