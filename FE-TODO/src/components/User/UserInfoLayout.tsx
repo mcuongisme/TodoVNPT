@@ -38,7 +38,7 @@ export const UserInfoLayout = () => {
                                 <p><strong>Email:</strong> {user.email}</p>
                             </>
                         )}
-                        <Button type="primary" onClick={() => { form.setFieldsValue(user); setEditing(true); }}>
+                        <Button color="danger" variant="solid" onClick={() => { form.setFieldsValue(user); setEditing(true); }}>
                             Chỉnh sửa
                         </Button>
                     </>
@@ -55,7 +55,7 @@ export const UserInfoLayout = () => {
                         </p>
                         <Space>
                             <Button onClick={() => setEditing(false)}>Hủy</Button>
-                            <Button type="primary" htmlType="submit" loading={loading}>Lưu</Button>
+                            <Button color="danger" variant="solid" htmlType="submit" loading={loading}>Lưu</Button>
                         </Space>
                     </Form>
                 )}

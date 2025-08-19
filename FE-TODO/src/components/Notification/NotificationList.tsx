@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { Card, Segmented, Space, Typography } from 'antd';
-import React, { use, useState } from 'react'
+import { Card, Space, Typography } from 'antd';
 import { GET_LIST_NOTIFICATION } from '../../graphql/queries/notificationQueries';
 import { LoadData } from '../Common/LoadData';
 const { Text } = Typography;
@@ -13,6 +12,7 @@ export const NotificationList = () => {
             {
                 data.getListNotification.map((notification: any) => (
                     <Card
+                        key={notification.id}
                         style={{
                             backgroundColor: notification.is_read ? '#f0f0f0' : '#fff',
                             borderRadius: 10,

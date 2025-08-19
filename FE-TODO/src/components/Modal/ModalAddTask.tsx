@@ -23,7 +23,20 @@ import dayjs from "dayjs";
 import { useCreateTask } from "../../hooks/useTasks";
 import { useNotificationContext } from "../Common/NotificationProvider";
 const { TextArea } = Input;
+const getDateFilterFromDueDate = (dueDate?: string) => {
+    if (!dueDate) return "future"; // hoặc default tùy bạn muốn
 
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const startOfToday = today.getTime();
+    const endOfToday = startOfToday + 24 * 60 * 60 * 1000 - 1;
+    const due = new Date(dueDate).getTime();
+
+    if (due < startOfToday) return "overdue";
+    if (due >= startOfToday && due <= endOfToday) return "today";
+    return "future";
+};
 const AddTaskModal: React.FC<ModalProps> = ({ open, onClose }) => {
     const { handleCreateTask, loading, error } = useCreateTask();
     const { showNotification } = useNotificationContext();
@@ -50,8 +63,10 @@ const AddTaskModal: React.FC<ModalProps> = ({ open, onClose }) => {
             priority: priority,
         };
 
+        const dateFilter = getDateFilterFromDueDate(taskData.due_date);
+
         try {
-            await handleCreateTask(taskData);
+            await handleCreateTask(taskData, dateFilter);
             showNotification("Thêm công việc thành công", "Công việc đã được thêm vào danh sách", "success");
             setTitle("");
             setNote("");
@@ -116,6 +131,7 @@ const AddTaskModal: React.FC<ModalProps> = ({ open, onClose }) => {
                     showTime={{ defaultValue: dayjs("00:00:00", "HH:mm:ss") }}
                     value={dueDate}
                     onChange={(date) => setDueDate(date)}
+                    required
                 />
                 <Select
                     value={priority}

@@ -33,7 +33,7 @@ export const Signup: React.FC = () => {
                 variant='outlined'
                 size='large'
             >
-                Continue with Google
+                Tiếp tục với Google
             </Button>
 
             <Form layout="vertical" onFinish={onFinish}>
@@ -64,8 +64,7 @@ export const Signup: React.FC = () => {
             <Divider />
 
             <Text type="secondary" style={{ fontSize: 12 }}>
-                Đã có tài khoản?
-                <Link href={ROUTES.ACCOUNT.LOGIN} type='danger'>Đến đăng nhập</Link>.
+                Đã có tài khoản? <Link href={ROUTES.ACCOUNT.LOGIN} type='danger'>Đến đăng nhập</Link>.
             </Text>
         </>
     );

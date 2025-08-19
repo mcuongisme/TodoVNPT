@@ -32,7 +32,7 @@ export const Login: React.FC = () => {
                 variant='outlined'
                 size='large'
             >
-                Continue with Google
+                Tiếp tục với Google
             </Button>
 
 
@@ -41,7 +41,7 @@ export const Login: React.FC = () => {
                     <Input size='large' placeholder="Enter your email..." />
                 </Form.Item>
 
-                <Form.Item label="Password" name="password" rules={[{ required: true, message: 'Please enter password' }]}>
+                <Form.Item label="Mật khẩu" name="password" rules={[{ required: true, message: 'Please enter password' }]}>
                     <Input.Password size='large' placeholder="Enter your password..." />
                 </Form.Item>
 
@@ -52,20 +52,20 @@ export const Login: React.FC = () => {
                         htmlType="submit"
                         block
                         size='large'>
-                        Log in
+                        Đăng nhập
                     </Button>
                 </Form.Item>
             </Form>
 
             <div style={{ textAlign: 'center', marginTop: 8 }}>
-                <Link href={ROUTES.ACCOUNT.FORGOT} type='danger'>Forgot your password?</Link>
+                <Link href={ROUTES.ACCOUNT.FORGOT} type='danger'>Quên mật khẩu?</Link>
             </div>
 
             <Divider />
 
             <Text type="secondary" style={{ fontSize: 12 }}>
-                Don’t have an account?
-                <Link href={ROUTES.ACCOUNT.REGISTER} type='danger'> Sign up</Link>.
+                Bạn chưa có tài khoản?
+                <Link href={ROUTES.ACCOUNT.REGISTER} type='danger'> Đăng kí</Link>.
             </Text>
         </>
     );

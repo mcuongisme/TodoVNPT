@@ -5,9 +5,16 @@ export const typeDefsNotification = gql`
         id: ID ,
         message: String,
         is_read: Boolean,
+        project_id: String,
         created_at: String,
     }
     type Query {
         getListNotification: [Notification],
+    }
+    type Mutation {
+        createNotification(message: String, project_id: String): Notification,
+    }
+    type Subcription {
+        newNotification(user_id: ID!): Notification
     }
 `;

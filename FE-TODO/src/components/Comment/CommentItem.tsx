@@ -21,16 +21,10 @@ export const CommentItem: React.FC<CommentItemProps> = ({ comment, onEdit, onDel
     const menu = (
         <Menu>
             <Menu.Item key="edit" onClick={() => onEdit?.(comment.id)}>
-                Edit
-            </Menu.Item>
-            <Menu.Item key="copy">
-                Copy text
-            </Menu.Item>
-            <Menu.Item key="link">
-                Copy link to comment
+                Sửa
             </Menu.Item>
             <Menu.Item key="delete" danger onClick={() => onDelete?.(comment.id)}>
-                Delete
+                Xóa
             </Menu.Item>
         </Menu>
     );

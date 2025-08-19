@@ -1,6 +1,5 @@
 import { useMutation, useQuery, useSubscription } from '@apollo/client';
 import { CREATE_COMMENT } from '../graphql/mutations/commentMutations';
-import { useState } from 'react';
 import { GET_LIST_COMMENT } from '../graphql/queries/commentQueries';
 import { COMMENT_ADDED } from '../graphql/subscription/commentSubcriptions';
 

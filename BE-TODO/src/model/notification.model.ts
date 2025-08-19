@@ -1,4 +1,4 @@
-import { Schema, model, Types } from 'mongoose';
+import { Schema, model } from 'mongoose';
 
 const NotificationSchema = new Schema({
     user_id: {
@@ -28,11 +28,11 @@ const NotificationSchema = new Schema({
     deleted: {
         type: Boolean,
         default: false
-    }, // Xóa mềm
+    },
     deleted_at: {
         type: Date,
         default: null
-    }, // Thời điểm xóa mềm
+    },
 });
 
 export const Notification = model('Notification', NotificationSchema);

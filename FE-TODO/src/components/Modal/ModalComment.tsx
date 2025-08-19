@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Tabs, Input, Button, Avatar, Upload, message } from 'antd';
-import { PaperClipOutlined, AudioOutlined, SmileOutlined } from '@ant-design/icons';
+import { PaperClipOutlined, AudioOutlined, SmileOutlined, SendOutlined } from '@ant-design/icons';
 import { useComment, useCommentRealtime } from '../../hooks/useComment';
 import { CommentList } from '../Comment/CommentList';
 
@@ -73,9 +73,8 @@ const ModalComment: React.FC<ModalCommentProps> = ({ open, onClose, taskId, task
                         <AudioOutlined style={{ fontSize: 18, marginRight: 12, cursor: 'pointer' }} />
                         <SmileOutlined style={{ fontSize: 18, cursor: 'pointer' }} />
                     </div>
-
                     <Button type="primary" onClick={handleSubmit} loading={loading}>
-                        Comment
+                        Gửi <SendOutlined style={{ marginLeft: 8 }} />
                     </Button>
                 </div>
             </div>

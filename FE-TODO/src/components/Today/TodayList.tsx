@@ -4,8 +4,8 @@ import { LoadData } from "../Common/LoadData";
 import { TaskItem } from "./TaskItem";
 import { FileDoneOutlined } from "@ant-design/icons";
 
-export const TodayList = () => {
-    const { loading, error, tasks } = useGetTasks();
+export const TodayList = ({ dateFilter }: { dateFilter: string }) => {
+    const { loading, error, tasks } = useGetTasks(dateFilter);
 
     if (loading || error) return <LoadData loading={loading} error={error} />;
     if (!tasks || tasks.length === 0) return <Empty description="Không có công việc nào" />;

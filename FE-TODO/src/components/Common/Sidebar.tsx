@@ -23,6 +23,7 @@ import { UserInfo } from "./UserInfo";
 import { ModalSearch } from "../Modal/ModalSearch";
 import { useGetProjects } from '../../hooks/useProject';
 import { ModalAddProject } from "../Modal/ModalAddProject";
+import { ButtonNotification } from "../Notification/ButtonNotification";
 const keyMap: Record<string, string> = {
     "/inbox": "inbox",
     "/today": "today",
@@ -49,7 +50,7 @@ export const Sidebar: React.FC = () => {
     const items: MenuItem[] = [
         {
             key: 'projects',
-            label: 'Dự án của tôi',
+            label: 'Dự án hỗ trợ',
             icon: <Avatar size={'small'} icon={<span style={{ fontSize: 18 }}>👤</span>} />,
             children: [
                 {
@@ -114,16 +115,16 @@ export const Sidebar: React.FC = () => {
                 </Link>
             ),
         },
-        // {
-        //     key: 'upcoming',
-        //     icon: <ClockCircleOutlined />,
-        //     title: 'Sắp tới',
-        //     label: (
-        //         <Link to={ROUTES.UPCOMING}>
-        //             {!collapsed && <>Sắp tới<span style={countStyle}>7</span></>}
-        //         </Link>
-        //     ),
-        // },
+        {
+            key: 'upcoming',
+            icon: <ClockCircleOutlined />,
+            title: 'Sắp tới',
+            label: (
+                <Link to={ROUTES.UPCOMING}>
+                    {!collapsed && <>Sắp tới<span style={countStyle}>7</span></>}
+                </Link>
+            ),
+        },
         {
             key: 'labels-filters',
             icon: <TagsOutlined />,
@@ -163,13 +164,7 @@ export const Sidebar: React.FC = () => {
                     <UserInfo />
                 )}
                 <div className={styles.button__right}>
-                    <Tooltip title="Open Notification">
-                        <Button
-                            type="text"
-                            icon={<BellOutlined />}
-                            href={ROUTES.NOTIFICATIONS}
-                        />
-                    </Tooltip>
+                    <ButtonNotification />
                     <Tooltip title="Open/Close Sidebar">
                         <Button
                             type="text"

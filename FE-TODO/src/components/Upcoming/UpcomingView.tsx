@@ -2,16 +2,14 @@ import React from 'react'
 import {
     Typography,
 } from "antd";
-import {
-    FileDoneOutlined,
-} from "@ant-design/icons";
-import { UpcomingCalender } from './UpcomingCalender';
+
+import { TodayList } from '../Today/TodayList';
 const { Title } = Typography
 export const UpcomingView = () => {
     return (
         <div style={{ padding: 24 }}>
             <Title level={3}>Công việc sắp tới</Title>
-            <UpcomingCalender />
+            <TodayList dateFilter="future" />
         </div>
     )
 }

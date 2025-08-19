@@ -48,7 +48,7 @@ export const ChangePassworrd = () => {
                     >
                         <Input.Password />
                     </Form.Item>
-                    <Button type="primary" htmlType="submit" loading={loading}>
+                    <Button color="danger" variant="solid" htmlType="submit" loading={loading}>
                         Đổi mật khẩu
                     </Button>
                 </Form>

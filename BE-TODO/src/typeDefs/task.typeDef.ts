@@ -17,6 +17,7 @@ export const typeDefsTask = gql`
             sortValue: String,
             currentPage: Int = 1,
             limitItem: Int = 1,
+            dateFilter: String
             ): [Task],
         getListTaskCompleted(sortKey: String, 
             sortValue: String,

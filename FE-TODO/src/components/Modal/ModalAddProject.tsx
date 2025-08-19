@@ -34,8 +34,6 @@ export const ModalAddProject: React.FC<ModalProps> = ({ open, onClose }) => {
         }
     };
 
-
-
     return (
         <Modal
             title="Add Project"
@@ -79,15 +77,6 @@ export const ModalAddProject: React.FC<ModalProps> = ({ open, onClose }) => {
                     </Select>
                 </Form.Item>
 
-                <Form.Item label="Workspace" name="workspace" initialValue="My Projects">
-                    <Input disabled prefix={<Avatar size="small" src="/your-avatar.png" />} />
-                </Form.Item>
-
-                <Form.Item label="Parent project" name="parentId" initialValue="">
-                    <Select allowClear>
-                        <Option value="">No Parent</Option>
-                    </Select>
-                </Form.Item>
             </Form>
         </Modal>
     );

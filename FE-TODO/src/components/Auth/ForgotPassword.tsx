@@ -20,14 +20,14 @@ export const ForgotPassword = () => {
                         variant="solid"
                         htmlType="submit" block
                         size='large'>
-                        Reset my password
+                        Lấy lại mật khẩu
                     </Button>
                 </Form.Item>
             </Form>
             <Divider />
 
             <Text type="secondary" style={{ fontSize: 12 }}>
-                <Link href={ROUTES.ACCOUNT.LOGIN} type='danger'> Go to login</Link>.
+                <Link href={ROUTES.ACCOUNT.LOGIN} type='danger'> Đến đăng nhập</Link>.
             </Text>
         </>
     )

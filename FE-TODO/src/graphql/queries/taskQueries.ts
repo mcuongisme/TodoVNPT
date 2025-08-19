@@ -7,12 +7,14 @@ export const GET_LIST_TASK = gql`
     $sortValue: String
     $currentPage: Int
     $limitItem: Int
+    $dateFilter: String
   ) {
     getListTask(
       sortKey: $sortKey
       sortValue: $sortValue
       currentPage: $currentPage
       limitItem: $limitItem
+      dateFilter: $dateFilter
     ) {
       id
       title

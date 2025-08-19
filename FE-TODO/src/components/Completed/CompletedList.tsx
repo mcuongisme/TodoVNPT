@@ -51,7 +51,7 @@ export const CompletedList = () => {
 
                             <div style={{ flex: 1 }}>
                                 <Text>
-                                    <strong>You</strong> completed a task:{" "}
+                                    <strong>Bạn </strong> đã hoàn thành:{" "}
                                     <Link>{task.title}</Link>
                                 </Text>
                             </div>
@@ -66,7 +66,7 @@ export const CompletedList = () => {
                 </div>
                 <Divider />
             </div>
-            <Text type="secondary">That's it. No more history to load.</Text>
+            <Text type="secondary">Chưa có công việc nào được hoàn thành.</Text>
         </div>
     )
 }

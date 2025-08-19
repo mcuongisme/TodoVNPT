@@ -4,18 +4,37 @@ export const resolversTask = {
     Query: {
         getListTask: async (_: any, args: any, context: any) => {
             const userId = getUserIdFromToken(context.req);
-            const { sortKey, sortValue, currentPage, limitItem } = args;
+            const { sortKey, sortValue, currentPage, limitItem, dateFilter } = args;
 
             const sort: any = {};
             if (sortKey && sortValue) sort[sortKey] = sortValue;
 
             const skip = (currentPage - 1) * limitItem;
 
-            const tasks = await Task.find({
+            const startOfToday = new Date();
+            startOfToday.setHours(0, 0, 0, 0);
+
+            const endOfToday = new Date();
+            endOfToday.setHours(23, 59, 59, 999);
+
+            const filter: any = {
                 created_by: userId,
                 completed: false,
                 deleted: false
-            }).sort(sort).limit(limitItem).skip(skip);
+            };
+
+            if (dateFilter === "overdue") {
+                filter.due_date = { $lt: startOfToday };
+            } else if (dateFilter === "today") {
+                filter.due_date = { $gte: startOfToday, $lte: endOfToday };
+            } else if (dateFilter === "future") {
+                filter.due_date = { $gt: endOfToday };
+            }
+
+            const tasks = await Task.find(filter)
+                .sort(sort)
+                .limit(limitItem)
+                .skip(skip);
 
             return tasks;
         },
@@ -50,10 +69,10 @@ export const resolversTask = {
             const { task } = args;
             try {
                 const userId = getUserIdFromToken(context.req);
-                const dueDate = task.due_date ? new Date(task.due_date) : undefined;
+                const due_date = task.due_date ? new Date(task.due_date) : undefined;
                 const record = new Task({
                     ...task,
-                    due_date: dueDate,
+                    due_date: due_date,
                     created_by: userId
                 })
                 await record.save();

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Divider, Form, Input, Typography } from 'antd';
-import { GoogleOutlined, FacebookFilled, AppleOutlined } from '@ant-design/icons';
 import { Outlet, useLocation } from 'react-router-dom';
 import styles from './Auth.module.scss';
 import { ROUTES } from '../../routes/paths';
@@ -10,9 +9,9 @@ export const AuthLayout: React.FC = () => {
     const location = useLocation();
 
     const getTitle = () => {
-        if (location.pathname === ROUTES.ACCOUNT.LOGIN) return 'Log in';
-        if (location.pathname === ROUTES.ACCOUNT.REGISTER) return 'Sign up';
-        if (location.pathname === ROUTES.ACCOUNT.FORGOT) return 'Forgot your Password ?';
+        if (location.pathname === ROUTES.ACCOUNT.LOGIN) return 'Đăng nhập';
+        if (location.pathname === ROUTES.ACCOUNT.REGISTER) return 'Đăng ký';
+        if (location.pathname === ROUTES.ACCOUNT.FORGOT) return 'Quên mật khẩu ?';
         return '';
     };
     return (
