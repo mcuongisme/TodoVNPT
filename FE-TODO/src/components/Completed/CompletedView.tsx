@@ -1,5 +1,5 @@
 import React from 'react'
-import { Collapse, Dropdown, Space, Typography, type MenuProps } from "antd";
+import { Dropdown, Space, Typography, type MenuProps } from "antd";
 import { DownOutlined } from '@ant-design/icons';
 import { CompletedList } from './CompletedList';
 
@@ -46,9 +46,7 @@ export const CompletedView = () => {
                     </Dropdown>
                 </Space>
             </Title>
-
             <CompletedList />
-
         </div>
 
     )

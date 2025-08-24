@@ -3,8 +3,10 @@ import { Button } from 'antd'
 import { useState } from 'react'
 import AddTaskModal from '../Modal/ModalAddTask'
 import { ProjectTaskList } from './ProjectTaskList'
+
 export const ProjectView = () => {
     const [modalOpen, setModalOpen] = useState(false)
+
 
     return (
         <div style={{ padding: 24 }}>
@@ -15,7 +17,7 @@ export const ProjectView = () => {
                 icon={<PlusOutlined />}
                 onClick={() => setModalOpen(true)}
             >
-                Add task
+                Thêm yêu cầu
             </Button>
             <AddTaskModal
                 open={modalOpen}

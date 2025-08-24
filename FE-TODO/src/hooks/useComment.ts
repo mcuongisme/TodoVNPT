@@ -7,11 +7,11 @@ export const useComment = () => {
     const [createComment, { loading, error }] = useMutation(CREATE_COMMENT);
     const handleComment = async ({
         content,
-        taskId,
+        taskId = null,
         parentId = null,
     }: {
         content: string;
-        taskId: string;
+        taskId: string | null;
         parentId?: string | null;
     }) => {
         if (!content.trim()) return;

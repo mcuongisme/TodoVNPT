@@ -39,7 +39,7 @@ type MenuItem = Required<MenuProps>['items'][number];
 export const Sidebar: React.FC = () => {
     const location = useLocation();
     const path = location.pathname;
-    const { data } = useGetProjects();
+    const { projects } = useGetProjects();
     const [modalOpenAddProject, setModalOpenAddProject] = useState(false)
     const [collapsed, setCollapsed] = useState(false);
     const [modalOpenAddTask, setModalOpenAddTask] = useState(false)
@@ -59,7 +59,7 @@ export const Sidebar: React.FC = () => {
                     icon: <PlusOutlined style={{ color: '#a81f00', fontWeight: 'bolder' }} />,
                     label: <span style={{ color: '#a81f00', fontWeight: 'bolder' }}>Thêm nhóm mới</span>,
                 },
-                ...(data?.map((project: any) => ({
+                ...(projects?.map((project: any) => ({
                     key: project.id,
                     icon: <ProjectOutlined />,
                     label: (
@@ -73,26 +73,26 @@ export const Sidebar: React.FC = () => {
         },
     ];
     const itemsMainMenu = [
-        {
-            key: 'add-task',
-            icon: <PlusCircleFilled style={{ color: '#a81f00', fontSize: '20px' }} />,
-            title: 'Thêm công việc',
-            onClick: () => setModalOpenAddTask(true),
-            label: !collapsed && (
-                <Text style={{ color: '#a81f00', fontSize: '15px', fontWeight: 'bold' }}>
-                    Thêm công việc
-                </Text>
-            ),
-        },
+        // {
+        //     key: 'add-task',
+        //     icon: <PlusCircleFilled style={{ color: '#a81f00', fontSize: '20px' }} />,
+        //     title: 'Thêm công việc',
+        //     onClick: () => setModalOpenAddTask(true),
+        //     label: !collapsed && (
+        //         <Text style={{ color: '#a81f00', fontSize: '15px', fontWeight: 'bold' }}>
+        //             Thêm công việc
+        //         </Text>
+        //     ),
+        // },
         {
             key: 'search',
-            icon: <SearchOutlined />,
+            icon: <SearchOutlined style={{ color: '#a81f00', fontSize: '20px' }} />,
             title: 'Tìm kiếm công việc',
             onClick: () => setModalOpenSearch(true),
             label: !collapsed && (
-                <>
-                    Tìm kiếm<span style={countStyle}>12</span>
-                </>
+                <Text style={{ color: '#a81f00', fontSize: '15px', fontWeight: 'bold' }}>
+                    Tìm kiếm
+                </Text>
             ),
         },
         // {
@@ -111,7 +111,7 @@ export const Sidebar: React.FC = () => {
             title: 'Hôm nay',
             label: (
                 <Link to={ROUTES.TODAY}>
-                    {!collapsed && <>Công việc hôm nay<span style={countStyle}>5</span></>}
+                    {!collapsed && <>Công việc hôm nay</>}
                 </Link>
             ),
         },
@@ -121,7 +121,7 @@ export const Sidebar: React.FC = () => {
             title: 'Sắp tới',
             label: (
                 <Link to={ROUTES.UPCOMING}>
-                    {!collapsed && <>Sắp tới<span style={countStyle}>7</span></>}
+                    {!collapsed && <>Sắp tới</>}
                 </Link>
             ),
         },
@@ -131,7 +131,7 @@ export const Sidebar: React.FC = () => {
             title: 'Nhãn',
             label: (
                 <Link to={ROUTES.LABEL_FILTER}>
-                    {!collapsed && <>Nhãn<span style={countStyle}>2</span></>}
+                    {!collapsed && <>Nhãn</>}
                 </Link>
             ),
         },
@@ -141,7 +141,7 @@ export const Sidebar: React.FC = () => {
             title: 'Đã hoàn thành',
             label: (
                 <Link to={ROUTES.COMPLETED}>
-                    {!collapsed && <>Đã hoàn thành<span style={countStyle}>2</span></>}
+                    {!collapsed && <>Đã hoàn thành</>}
                 </Link>
             ),
         },

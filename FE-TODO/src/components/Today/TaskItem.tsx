@@ -48,8 +48,6 @@ export const TaskItem = ({ task, onSave }: { task: any; onSave: (id: string, dat
         setEditing(false);
     };
 
-
-
     return (
         <>
             <div
@@ -108,9 +106,9 @@ export const TaskItem = ({ task, onSave }: { task: any; onSave: (id: string, dat
                         <Tooltip title="Comment">
                             <CommentOutlined onClick={() => setOpenModalComment(true)} style={{ cursor: "pointer" }} />
                         </Tooltip>
-                        <Tooltip title="More">
+                        {/* <Tooltip title="More">
                             <MoreOutlined style={{ cursor: "pointer" }} />
-                        </Tooltip>
+                        </Tooltip> */}
                     </Space>
                 )}
             </div>

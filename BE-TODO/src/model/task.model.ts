@@ -46,6 +46,10 @@ const TaskSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    completed_at: {
+        type: Date,
+        default: null
+    },
 });
 
 export const Task = model('Task', TaskSchema);

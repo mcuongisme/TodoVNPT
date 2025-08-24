@@ -1,7 +1,6 @@
 import React from 'react'
 import { Typography, Avatar, Space, Divider, Empty } from "antd";
 import { CheckCircleFilled } from "@ant-design/icons";
-import type { TaskGroup } from '../../types';
 import { useGetTasksCompleted } from '../../hooks/useTasks';
 import { LoadData } from '../Common/LoadData';
 const { Text, Link } = Typography;
@@ -17,7 +16,6 @@ export const CompletedList = () => {
     return (
         <div style={{ padding: 24 }}>
             <div>
-                <Text strong>dateLabel</Text>
                 <div style={{ marginTop: 12 }}>
                     {tasks.map((task: any) => (
                         <div
@@ -56,7 +54,6 @@ export const CompletedList = () => {
                                 </Text>
                             </div>
 
-                            {/* Time + Project */}
                             <Space direction="vertical" align="end">
                                 <Text type="secondary">time</Text>
                                 <Text type="secondary">project</Text>

@@ -8,7 +8,8 @@ export const useNotificationRealtime = (user_id: string) => {
     });
 
     return {
-        notificationrt: data?.commentAdded ?? null,
+        notificationrt: data?.newNotification ?? null
+
     };
 };
 

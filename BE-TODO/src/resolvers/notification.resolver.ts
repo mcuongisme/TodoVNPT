@@ -4,19 +4,27 @@ import { getUserIdFromToken } from "../utils/auth";
 
 export const resolversNotification = {
     Query: {
-        getListNotification: async (_: any, args: any) => {
+        getListNotification: async (_: any, args: any, context: any) => {
+            const userId = getUserIdFromToken(context.req);
+            if (!userId) {
+                throw new Error("Unauthorized");
+            }
+
             const notifications = await Notification.find({
-                deleted: false
+                deleted: false,
+                user_id: { $ne: userId }
             }).sort({ created_at: -1 });
+
             return notifications;
         },
     },
-    Subcription: {
+    Subscription: {
         newNotification: {
-            subscribe: (_: any, { user_id }: { user_id: any }, { pubsub }: { pubsub: PubSub }) => {
-                pubsub.asyncIterableIterator(`NOTIFICATION_${user_id}`)
-            }
-        }
+            subscribe: (_: any, { user_id }: { user_id: string }, { pubsub }: { pubsub: PubSub }) => {
+                if (!user_id) throw new Error("user_id is required");
+                return pubsub.asyncIterableIterator(`NEW_NOTIFICATION_${user_id}`);
+            },
+        },
     },
     Mutation: {
         createNotification: async (_: any, args: { message: string, project_id?: string }, context: any) => {

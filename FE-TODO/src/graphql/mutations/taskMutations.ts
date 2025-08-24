@@ -6,8 +6,8 @@ export const CREATE_TASK = gql`
         createTask(task: $task) {
             title
             note
-            priority
             due_date
+            project_id
             created_by
         }
     }

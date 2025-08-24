@@ -5,14 +5,12 @@ import { useComment, useCommentRealtime } from '../../hooks/useComment';
 import { CommentList } from '../Comment/CommentList';
 
 const { TextArea } = Input;
-
 interface ModalCommentProps {
     open: boolean;
     onClose: () => void;
     taskId: string;
     taskTitle: string
 }
-
 const ModalComment: React.FC<ModalCommentProps> = ({ open, onClose, taskId, taskTitle }) => {
     const [comment, setComment] = useState('');
     const { handleComment, loading, error } = useComment();

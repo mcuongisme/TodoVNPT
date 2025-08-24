@@ -1,3 +1,4 @@
+import { TaskLabel } from "../model/task-label.model";
 import { Task } from "../model/task.model"
 import { getUserIdFromToken } from "../utils/auth";
 export const resolversTask = {
@@ -8,9 +9,7 @@ export const resolversTask = {
 
             const sort: any = {};
             if (sortKey && sortValue) sort[sortKey] = sortValue;
-
             const skip = (currentPage - 1) * limitItem;
-
             const startOfToday = new Date();
             startOfToday.setHours(0, 0, 0, 0);
 
@@ -70,14 +69,29 @@ export const resolversTask = {
             try {
                 const userId = getUserIdFromToken(context.req);
                 const due_date = task.due_date ? new Date(task.due_date) : undefined;
+
+                // 1. Tạo Task
                 const record = new Task({
-                    ...task,
+                    title: task.title,
+                    note: task.note,
+                    priority: task.priority,
                     due_date: due_date,
+                    project_id: task.project_id,
                     created_by: userId
-                })
+                });
                 await record.save();
+                if (task.labelIds && task.labelIds.length > 0) {
+                    const taskLabels = task.labelIds.map((labelId: string) => ({
+                        task_id: record._id.toString(),
+                        label_id: labelId
+                    }));
+
+                    await TaskLabel.insertMany(taskLabels);
+                }
+
                 return record;
             } catch (error) {
+                console.error(error);
                 throw new Error("Invalid token");
             }
         },
@@ -106,7 +120,7 @@ export const resolversTask = {
         },
         updateTaskCompleted: async (_: any, args: any) => {
             const { id, completed } = args;
-            const task = await Task.findById(id); // Sequelize ví dụ
+            const task = await Task.findById(id);
             if (!task) throw new Error("Task not found");
 
             task.completed = completed;

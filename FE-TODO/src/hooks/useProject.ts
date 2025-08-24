@@ -5,7 +5,7 @@ import { CREATE_PROJECT } from '../graphql/mutations/projectMutations';
 export const useGetProjects = () => {
     const { loading, error, data } = useQuery(GET_LIST_PROJECT);
     return {
-        data: data?.getListProject || [],
+        projects: data?.getListProject || [],
         loading,
         error,
     };

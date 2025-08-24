@@ -12,7 +12,6 @@ export const ProjectTaskList = () => {
     const { loading, error, data } = useGetProject(id!);
     if (loading || error) return <LoadData loading={loading} error={error} />;
 
-
     const handleSave = (id: string, updatedData: any) => {
         console.log("Lưu lại task:", id, updatedData);
     };

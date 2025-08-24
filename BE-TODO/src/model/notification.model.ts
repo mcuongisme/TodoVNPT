@@ -1,18 +1,9 @@
 import { Schema, model } from 'mongoose';
 
 const NotificationSchema = new Schema({
-    user_id: {
-        type: String,
-        ref: 'User', required: true
-    },
-    task_id: {
-        type: String,
-        ref: 'Task', default: null
-    },
-    project_id: {
-        type: String,
-        ref: 'Project', default: null
-    },
+    user_id: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    task_id: { type: Schema.Types.ObjectId, ref: 'Task', default: null },
+    project_id: { type: Schema.Types.ObjectId, ref: 'Project', default: null },
     message: {
         type: String,
         required: true

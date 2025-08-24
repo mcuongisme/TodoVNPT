@@ -14,7 +14,7 @@ export const typeDefsNotification = gql`
     type Mutation {
         createNotification(message: String, project_id: String): Notification,
     }
-    type Subcription {
+    type Subscription {
         newNotification(user_id: ID!): Notification
     }
 `;

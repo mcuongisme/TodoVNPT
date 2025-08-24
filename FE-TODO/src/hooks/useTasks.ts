@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_LIST_TASK, GET_LIST_TASK_COMPLETED } from '../graphql/queries/taskQueries';
 import { CREATE_TASK, UPDATE_TASK, UPDATE_TASK_COMPLETED } from '../graphql/mutations/taskMutations';
+import { GET_PROJECT } from '../graphql/queries/projectQueries';
 
 
 export const useGetTasks = (dateFilter: string) => {
@@ -54,6 +55,10 @@ export const useCreateTask = () => {
                             limitItem: 10,
                             dateFilter
                         }
+                    },
+                    {
+                        query: GET_PROJECT,
+                        variables: { id: task.project_id }
                     }
                 ],
                 awaitRefetchQueries: true
@@ -96,7 +101,7 @@ export const useUpdateTaskCompleted = () => {
         refetchQueries: [
             {
                 query: GET_LIST_TASK,
-                variables: { sortKey: "createdAt", sortValue: "desc", currentPage: 1, limitItem: 10 }
+                variables: { sortKey: "createdAt", sortValue: "desc", currentPage: 1, limitItem: 15 }
             }
         ],
         awaitRefetchQueries: true

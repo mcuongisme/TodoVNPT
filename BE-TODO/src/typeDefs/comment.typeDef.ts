@@ -12,6 +12,7 @@ export const typeDefsComment = gql`
         content: String!
         task: Task!
         author: User
+        project:ID
         parent: Comment
         created_at: String!
         updated_at: String!
@@ -22,6 +23,7 @@ export const typeDefsComment = gql`
         content: String!
         taskId: ID
         parentId: ID
+
     }
     type Query {
         getListComment(taskId: ID!): [Comment]

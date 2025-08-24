@@ -8,6 +8,7 @@ export const typeDefsTask = gql`
         note: String,
         priority: String,
         due_date: String,
+        project_id: String,
         completed: Boolean,
         created_by: String
         }
@@ -32,7 +33,9 @@ export const typeDefsTask = gql`
         note: String,
         priority: String,
         due_date: String,
+        project_id: String,
         created_by: String,
+        labelIds:[String]
     }
 
     type Mutation {
