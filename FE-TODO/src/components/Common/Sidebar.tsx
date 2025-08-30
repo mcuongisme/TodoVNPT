@@ -14,6 +14,7 @@ import {
     SearchOutlined,
     BellOutlined,
     PlusOutlined,
+    AliwangwangOutlined,
 } from "@ant-design/icons";
 import styles from "./Sidebar.module.scss"
 import AddTaskModal from "../Modal/ModalAddTask";
@@ -24,6 +25,7 @@ import { ModalSearch } from "../Modal/ModalSearch";
 import { useGetProjects } from '../../hooks/useProject';
 import { ModalAddProject } from "../Modal/ModalAddProject";
 import { ButtonNotification } from "../Notification/ButtonNotification";
+import { useGetCurrentUser } from "../../hooks/useAuth";
 const keyMap: Record<string, string> = {
     "/inbox": "inbox",
     "/today": "today",
@@ -31,12 +33,11 @@ const keyMap: Record<string, string> = {
     "/labels-filters": "labels-filters",
     "/completed": "completed",
 };
-
 const { Sider } = Layout;
-const { Text } = Typography;
 type MenuItem = Required<MenuProps>['items'][number];
 
 export const Sidebar: React.FC = () => {
+    const { user } = useGetCurrentUser()
     const location = useLocation();
     const path = location.pathname;
     const { projects } = useGetProjects();
@@ -47,17 +48,21 @@ export const Sidebar: React.FC = () => {
     const [modalOpenSearch, setModalOpenSearch] = useState(false)
 
     const toggleCollapse = () => setCollapsed(!collapsed);
-    const items: MenuItem[] = [
-        {
-            key: 'projects',
-            label: 'Dự án hỗ trợ',
-            icon: <Avatar size={'small'} icon={<span style={{ fontSize: 18 }}>👤</span>} />,
+    const items: MenuItem[] = [];
+
+    if (user?.role === "STAFF" || user?.role === "CUSTOMER") {
+        items.push({
+            key: "projects",
+            label: "Dự án hỗ trợ",
+            icon: <Avatar size={"small"} icon={<span style={{ fontSize: 18 }}>👤</span>} />,
             children: [
                 {
-                    key: 'add-new-group',
-                    onClick: () => { setModalOpenAddProject(true) },
-                    icon: <PlusOutlined style={{ color: '#a81f00', fontWeight: 'bolder' }} />,
-                    label: <span style={{ color: '#a81f00', fontWeight: 'bolder' }}>Thêm nhóm mới</span>,
+                    key: "add-new-group",
+                    onClick: () => {
+                        setModalOpenAddProject(true);
+                    },
+                    icon: <PlusOutlined style={{ color: "#a81f00", fontWeight: "bolder" }} />,
+                    label: <span style={{ color: "#a81f00", fontWeight: "bolder" }}>Thêm nhóm mới</span>,
                 },
                 ...(projects?.map((project: any) => ({
                     key: project.id,
@@ -66,89 +71,53 @@ export const Sidebar: React.FC = () => {
                         <Link to={ROUTES.PROJECT.DETAIL(project.id)}>
                             {project.name}
                         </Link>
-                    )
+                    ),
                 })) || []),
-
             ],
-        },
-    ];
-    const itemsMainMenu = [
-        // {
-        //     key: 'add-task',
-        //     icon: <PlusCircleFilled style={{ color: '#a81f00', fontSize: '20px' }} />,
-        //     title: 'Thêm công việc',
-        //     onClick: () => setModalOpenAddTask(true),
-        //     label: !collapsed && (
-        //         <Text style={{ color: '#a81f00', fontSize: '15px', fontWeight: 'bold' }}>
-        //             Thêm công việc
-        //         </Text>
-        //     ),
-        // },
+        });
+    }
+    const baseItems: MenuItem[] = [
         {
-            key: 'search',
-            icon: <SearchOutlined style={{ color: '#a81f00', fontSize: '20px' }} />,
-            title: 'Tìm kiếm công việc',
-            onClick: () => setModalOpenSearch(true),
-            label: !collapsed && (
-                <Text style={{ color: '#a81f00', fontSize: '15px', fontWeight: 'bold' }}>
-                    Tìm kiếm
-                </Text>
-            ),
-        },
-        // {
-        //     key: 'inbox',
-        //     icon: <InboxOutlined />,
-        //     title: 'Hộp thư đến',
-        //     label: (
-        //         <Link to={ROUTES.INBOX}>
-        //             {!collapsed && <>Hộp thư đến<span style={countStyle}>12</span></>}
-        //         </Link>
-        //     ),
-        // },
-        {
-            key: 'today',
+            key: "today",
             icon: <CalendarOutlined />,
-            title: 'Hôm nay',
-            label: (
-                <Link to={ROUTES.TODAY}>
-                    {!collapsed && <>Công việc hôm nay</>}
-                </Link>
-            ),
+            title: "Hôm nay",
+            label: <Link to={ROUTES.TODAY}>{!collapsed && <>Công việc hôm nay</>}</Link>,
         },
         {
-            key: 'upcoming',
+            key: "upcoming",
             icon: <ClockCircleOutlined />,
-            title: 'Sắp tới',
-            label: (
-                <Link to={ROUTES.UPCOMING}>
-                    {!collapsed && <>Sắp tới</>}
-                </Link>
-            ),
+            title: "Sắp tới",
+            label: <Link to={ROUTES.UPCOMING}>{!collapsed && <>Sắp tới</>}</Link>,
         },
         {
-            key: 'labels-filters',
-            icon: <TagsOutlined />,
-            title: 'Nhãn',
-            label: (
-                <Link to={ROUTES.LABEL_FILTER}>
-                    {!collapsed && <>Nhãn</>}
-                </Link>
-            ),
-        },
-        {
-            key: 'completed',
+            key: "completed",
             icon: <CheckCircleOutlined />,
-            title: 'Đã hoàn thành',
-            label: (
-                <Link to={ROUTES.COMPLETED}>
-                    {!collapsed && <>Đã hoàn thành</>}
-                </Link>
-            ),
+            title: "Đã hoàn thành",
+            label: <Link to={ROUTES.COMPLETED}>{!collapsed && <>Đã hoàn thành</>}</Link>,
         },
-    ];
+    ]
 
+    const labelItem: MenuItem = {
+        key: "labels-filters",
+        icon: <TagsOutlined />,
+        title: "Nhãn",
+        label: <Link to={ROUTES.LABEL_FILTER}>{!collapsed && <>Nhãn</>}</Link>,
+    }
 
+    const registerEmployeeItem: MenuItem = {
+        key: "register-employee",
+        icon: <AliwangwangOutlined />,
+        title: "Đăng kí tài khoản cho nhân viên",
+        label: <Link to={ROUTES.ACCOUNT.REGISTER_EMPLOYEE}>{!collapsed && <>Đăng kí cho nhân viên</>}</Link>,
+    }
 
+    let itemsMainMenu: MenuItem[] = [...baseItems]
+
+    if (user?.role === "CUSTOMER" || user?.role === "STAFF") {
+        itemsMainMenu.splice(2, 0, labelItem)
+    } else if (user?.role === "ADMIN") {
+        itemsMainMenu.splice(2, 0, registerEmployeeItem)
+    }
     return (
         <Sider
             width={260}

@@ -61,9 +61,7 @@ export const CompletedList = () => {
                         </div>
                     ))}
                 </div>
-                <Divider />
             </div>
-            <Text type="secondary">Chưa có công việc nào được hoàn thành.</Text>
         </div>
     )
 }

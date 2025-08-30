@@ -35,6 +35,7 @@ export const UserInfoLayout = () => {
                             <>
                                 <p><strong>Họ:</strong> {user.firstName}</p>
                                 <p><strong>Tên:</strong> {user.lastName}</p>
+                                <p><strong>Vai trò:</strong> {user.role}</p>
                                 <p><strong>Email:</strong> {user.email}</p>
                             </>
                         )}

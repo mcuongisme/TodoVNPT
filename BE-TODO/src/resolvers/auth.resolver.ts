@@ -24,17 +24,49 @@ export const resolversAuth = {
         }
     },
     Mutation: {
-        register: async (_: any, { email, password, firstName, lastName }: any, { res }: { res: Response }) => {
+        register: async (_: any, { email, password, firstName, lastName }: any) => {
+            const existingUser = await User.findOne({ email });
+            if (existingUser) throw new Error("Email already in use");
+
             const hashedPassword = await bcrypt.hash(password, 10);
-            const user = new User({ email, password: hashedPassword, firstName, lastName });
+            const user = new User({
+                email,
+                password: hashedPassword,
+                firstName,
+                lastName,
+                role: "CUSTOMER"
+            });
+
             await user.save();
 
             const { access_token } = generateTokens(user);
-
-
             return { user, access_token };
         },
+        registerEmployee: async (_: any, { email, password, firstName, lastName, role, avatar }: any) => {
 
+            // if (!user || user.role !== "ADMIN") {
+            //     throw new Error("Chỉ có tài khoản admin mới được đăng kí");
+            // }
+
+            const existingUser = await User.findOne({ email });
+            if (existingUser) throw new Error("Email already in use");
+
+            const hashedPassword = await bcrypt.hash(password, 10);
+
+            const newUser = new User({
+                email,
+                password: hashedPassword,
+                firstName,
+                lastName,
+                role,
+                avatar
+            });
+
+            await newUser.save();
+
+            const { access_token } = generateTokens(newUser);
+            return { user: newUser, access_token };
+        },
         login: async (_: any, { email, password }: any, { res }: { res: Response }) => {
             const user = await User.findOne({ email });
             if (!user) throw new Error('User not found');

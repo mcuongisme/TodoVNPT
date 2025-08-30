@@ -12,7 +12,9 @@ import { execute, subscribe } from 'graphql';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { PubSub } from 'graphql-subscriptions';
-
+import { ParamsDictionary } from 'express-serve-static-core';
+import { ParsedQs } from 'qs';
+import { getUserFromToken } from './utils/auth';
 connect();
 export const secretkey = process.env.ACCESS_TOKEN_SECRET || 'default_secret_key';
 export const refreshSecretKey = process.env.REFRESH_TOKEN_SECRET || 'default_refresh_secret_key';
@@ -40,7 +42,10 @@ const startServer = async () => {
 
     const apolloServer = new ApolloServer({
         schema,
-        context: ({ req, res }: { req: Request, res: Response }) => ({ req, res, pubsub }),
+        context: async ({ req, res }: { req: Request; res: Response }) => {
+            const user = await getUserFromToken(req);
+            return { req, res, pubsub, user };
+        },
     });
 
     await apolloServer.start();
@@ -80,3 +85,4 @@ const startServer = async () => {
 };
 
 startServer();
+

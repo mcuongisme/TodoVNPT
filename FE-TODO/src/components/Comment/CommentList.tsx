@@ -3,7 +3,7 @@ import { CommentItem } from './CommentItem';
 import { useCommentRealtime, useGetListComment } from '../../hooks/useComment';
 
 export const CommentList = ({ taskId }: { taskId: string }) => {
-    const { comments, loading, error } = useGetListComment(taskId);
+    const { comments } = useGetListComment(taskId);
     const { commentrt } = useCommentRealtime(taskId);
 
     const [realtimeComments, setRealtimeComments] = React.useState<any[]>([]);
@@ -11,7 +11,6 @@ export const CommentList = ({ taskId }: { taskId: string }) => {
     React.useEffect(() => {
         if (commentrt) {
             setRealtimeComments(prev => {
-                // tránh thêm trùng id
                 if (prev.some(c => c.id === commentrt.id)) return prev;
                 return [...prev, commentrt];
             });

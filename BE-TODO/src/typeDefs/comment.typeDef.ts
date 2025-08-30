@@ -6,7 +6,9 @@ export const typeDefsComment = gql`
         email: String
         firstName: String
         lastName: String
-        created_at: String}
+        role: String
+        created_at: String
+    }
     type Comment {
         id: ID!
         content: String!

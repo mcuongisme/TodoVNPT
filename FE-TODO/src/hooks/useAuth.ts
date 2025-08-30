@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { CHANGE_INFO_MUTATION, CHANGE_PASSWORD_MUTATION } from "../graphql/mutations/authMutations";
+import { CHANGE_INFO_MUTATION, CHANGE_PASSWORD_MUTATION, REGISTER_EMPLOYEE_MUTATION } from "../graphql/mutations/authMutations";
 import { GET_CURRENT_USER } from "../graphql/queries/userQueries";
 
 export const useGetCurrentUser = () => {
@@ -47,3 +47,29 @@ export const useChangeInfo = () => {
 
     return { handleChangeInfo, loading, error };
 }
+
+export const useRegisterEmployee = () => {
+    const [registerEmployee, { loading, error }] = useMutation(REGISTER_EMPLOYEE_MUTATION);
+
+    const handleRegisterEmployee = async (
+        email: string,
+        password: string,
+        firstName?: string,
+        lastName?: string,
+        role: string = "staff",
+        avatar?: string
+    ) => {
+        try {
+            const { data } = await registerEmployee({
+                variables: { email, password, firstName, lastName, role, avatar },
+            });
+            console.log("Đăng ký nhân viên thành công:", data);
+            return data;
+        } catch (err) {
+            console.error("Lỗi đăng ký nhân viên:", err);
+            throw err;
+        }
+    };
+
+    return { handleRegisterEmployee, loading, error };
+};

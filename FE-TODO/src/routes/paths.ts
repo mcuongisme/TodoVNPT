@@ -22,5 +22,6 @@ export const ROUTES = {
         REGISTER: `${accPrefix}/register`,
         FORGOT: `${accPrefix}/forgot`,
         PROFILE: `${accPrefix}/profile`,
+        REGISTER_EMPLOYEE: `${accPrefix}/register-employee`,
     }
 };

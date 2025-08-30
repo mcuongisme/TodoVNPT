@@ -47,3 +47,33 @@ export const CHANGE_INFO_MUTATION = gql`
     }
   }
 `;
+
+export const REGISTER_EMPLOYEE_MUTATION = gql`
+  mutation registerEmployee(
+    $email: String!
+    $password: String!
+    $firstName: String
+    $lastName: String
+    $role: String!
+    $avatar: String
+  ) {
+    registerEmployee(
+      email: $email
+      password: $password
+      firstName: $firstName
+      lastName: $lastName
+      role: $role
+      avatar: $avatar
+    ) {
+      user {
+        id
+        email
+        firstName
+        lastName
+        role
+        avatar
+      }
+      access_token
+    }
+  }
+`;

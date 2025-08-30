@@ -10,6 +10,7 @@ export const GET_LIST_COMMENT = gql`
         id
         lastName
         firstName
+        role
       }
       parent {
         id

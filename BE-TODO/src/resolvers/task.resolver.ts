@@ -4,23 +4,29 @@ import { getUserIdFromToken } from "../utils/auth";
 export const resolversTask = {
     Query: {
         getListTask: async (_: any, args: any, context: any) => {
-            const userId = getUserIdFromToken(context.req);
+            const { user } = context;
+            if (!user) {
+                throw new Error("Unauthorized");
+            }
+
             const { sortKey, sortValue, currentPage, limitItem, dateFilter } = args;
 
             const sort: any = {};
             if (sortKey && sortValue) sort[sortKey] = sortValue;
+
             const skip = (currentPage - 1) * limitItem;
+
             const startOfToday = new Date();
             startOfToday.setHours(0, 0, 0, 0);
 
             const endOfToday = new Date();
             endOfToday.setHours(23, 59, 59, 999);
 
-            const filter: any = {
-                created_by: userId,
-                completed: false,
-                deleted: false
-            };
+            const filter: any = { completed: false, deleted: false };
+
+            if (user.role !== "ADMIN") {
+                filter.created_by = user._id;
+            }
 
             if (dateFilter === "overdue") {
                 filter.due_date = { $lt: startOfToday };

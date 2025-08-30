@@ -6,7 +6,10 @@ export const typeDefsAuth = gql`
         email: String
         firstName: String
         lastName: String
-        created_at: String}
+        created_at: String
+        role: String
+        avatar:String
+    }
     type AuthPayload {
         user: User
         access_token: String
@@ -20,6 +23,14 @@ export const typeDefsAuth = gql`
     }
     type Mutation {
         register(email: String, password: String, firstName: String, lastName: String): AuthPayload
+        registerEmployee(
+            email: String!
+            password: String!
+            firstName: String
+            lastName: String
+            role: String!     
+            avatar: String
+        ): AuthPayload
         login(email: String, password: String): AuthPayload
         changePassword(currentPassword: String, newPassword: String): AccessTokenPayload
         changeInfo(firstName: String, lastName: String): User
