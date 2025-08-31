@@ -89,20 +89,23 @@ export const Sidebar: React.FC = () => {
             title: "Sắp tới",
             label: <Link to={ROUTES.UPCOMING}>{!collapsed && <>Sắp tới</>}</Link>,
         },
+
+    ]
+
+    const labelItem: MenuItem[] = [
         {
             key: "completed",
             icon: <CheckCircleOutlined />,
             title: "Đã hoàn thành",
             label: <Link to={ROUTES.COMPLETED}>{!collapsed && <>Đã hoàn thành</>}</Link>,
         },
+        {
+            key: "labels-filters",
+            icon: <TagsOutlined />,
+            title: "Nhãn",
+            label: <Link to={ROUTES.LABEL_FILTER}>{!collapsed && <>Nhãn</>}</Link>,
+        }
     ]
-
-    const labelItem: MenuItem = {
-        key: "labels-filters",
-        icon: <TagsOutlined />,
-        title: "Nhãn",
-        label: <Link to={ROUTES.LABEL_FILTER}>{!collapsed && <>Nhãn</>}</Link>,
-    }
 
     const registerEmployeeItem: MenuItem = {
         key: "register-employee",
@@ -114,7 +117,7 @@ export const Sidebar: React.FC = () => {
     let itemsMainMenu: MenuItem[] = [...baseItems]
 
     if (user?.role === "CUSTOMER" || user?.role === "STAFF") {
-        itemsMainMenu.splice(2, 0, labelItem)
+        itemsMainMenu.splice(2, 0, ...labelItem)
     } else if (user?.role === "ADMIN") {
         itemsMainMenu.splice(2, 0, registerEmployeeItem)
     }

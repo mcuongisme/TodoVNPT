@@ -40,9 +40,9 @@ export const resolversTask = {
                 .sort(sort)
                 .limit(limitItem)
                 .skip(skip);
-
             return tasks;
         },
+
         getListTaskCompleted: async (_: any, args: any, context: any) => {
             const userId = getUserIdFromToken(context.req);
             const { sortKey, sortValue, currentPage, limitItem } = args;
